@@ -25,7 +25,7 @@ export const projects = [
     },
     tech: ['React', 'Node.js', 'Express', 'TypeScript', 'PostgreSQL', 'pgvector', 'Ollama', 'WebSockets', 'Stripe', 'Docker'],
     links: {
-      demo: 'https://frontend-psi-ashen-43.vercel.app',
+      demo: 'https://iadocuments-jmabellan.vercel.app',
       github: 'https://github.com/JuanMiguelAbellan/Proyecto-2-DAW',
     },
   },
