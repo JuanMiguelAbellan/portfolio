@@ -92,15 +92,18 @@ export const projects = [
         'Feature engineering temporal por ventana deslizante (frecuencia, entropía de dominios, tiempo desde última aparición...).',
         'Comparativa sistemática de arquitecturas, funciones de pérdida y umbrales vía un orquestador de experimentos propio.',
         'VAE con pérdida combinada de reconstrucción + divergencia KL.',
+        'Demo pública con datos 100% sintéticos: mismo autoencoder entrenado desde cero, inferencia en el navegador con TensorFlow.js, sin backend.',
       ],
       en: [
         'Sliding-window temporal feature engineering (frequency, domain entropy, time since last seen...).',
         'Systematic comparison of architectures, loss functions and thresholds via a custom experiment orchestrator.',
         'VAE with a combined reconstruction + KL-divergence loss.',
+        'Public demo with 100% synthetic data: the same autoencoder trained from scratch, inference running in-browser with TensorFlow.js, no backend.',
       ],
     },
     tech: ['Python', 'TensorFlow/Keras', 'scikit-learn', 'pandas'],
     links: {
+      demo: 'https://anomaly-detection-demo-jmabellan.vercel.app',
       github: 'https://github.com/JuanMiguelAbellan/autoencoders',
     },
   },
