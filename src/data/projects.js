@@ -30,26 +30,50 @@ export const projects = [
     },
   },
   {
+    id: 'react-agent-loop',
+    featured: false,
+    title: 'react-agent-loop',
+    description: {
+      es: 'Paquete open source publicado en npm: un bucle de agente con patrón ReAct, sin dependencias, para cualquier cliente de chat. Lo extraje de agent-cli (más abajo) al darme cuenta de que el bucle no tenía nada específico de mi CLI — así que ahora agent-cli depende de este paquete, no al revés.',
+      en: 'Open source package published on npm: a dependency-free ReAct-pattern agent loop for any chat client. Extracted out of agent-cli (below) once I realized the loop itself had nothing CLI-specific about it — agent-cli now depends on this package, not the other way around.',
+    },
+    highlights: {
+      es: [
+        'Funciona con cualquier proveedor: solo necesita un cliente con chat(mensajes) => Promise<string>, no está atado a Ollama.',
+        'Nace de un bug real: el tools nativo de Ollama se colgaba con el modelo usado — este paquete implementa function calling sin depender de que el proveedor lo soporte bien.',
+        '14 tests, cero dependencias de producción.',
+      ],
+      en: [
+        'Works with any provider: only needs a client with chat(messages) => Promise<string>, not tied to Ollama.',
+        'Born from a real bug: Ollama\'s native tools parameter hung with the model in use — this package implements function calling without depending on the provider supporting it correctly.',
+        '14 tests, zero production dependencies.',
+      ],
+    },
+    tech: ['TypeScript', 'npm', 'Jest'],
+    links: {
+      demo: 'https://www.npmjs.com/package/react-agent-loop',
+      github: 'https://github.com/JuanMiguelAbellan/react-agent-loop',
+    },
+  },
+  {
     id: 'agent-cli',
     featured: false,
     title: 'agent-cli',
     description: {
-      es: 'Agente de línea de comandos con uso de herramientas (tool use) sobre un LLM autoalojado. El soporte nativo de function calling de Ollama se quedaba colgado con el modelo usado, así que implementé el patrón ReAct a mano: el modelo pide una acción en JSON, se ejecuta la herramienta real y se le devuelve el resultado, en bucle hasta la respuesta final.',
-      en: 'Command-line agent with tool use over a self-hosted LLM. Ollama\'s native function-calling support hung with the model used, so I implemented the ReAct pattern by hand: the model requests an action as JSON, the real tool runs, and the result feeds back in, looping until a final answer.',
+      es: 'Agente de línea de comandos con uso de herramientas reales (tiempo, GitHub, ficheros, cálculo) sobre un LLM autoalojado, construido sobre react-agent-loop (arriba).',
+      en: 'Command-line agent with real tool use (weather, GitHub, files, calculator) over a self-hosted LLM, built on top of react-agent-loop (above).',
     },
     highlights: {
       es: [
-        'Bucle ReAct propio: parseo robusto de JSON, encadenado de varias herramientas en una sola tarea, manejo de errores de herramienta sin romper la ejecución.',
-        '5 herramientas sin coste ni claves: tiempo, info de repos de GitHub, calculadora, lectura de ficheros y listado de directorio (estas dos con sandboxing real contra path traversal).',
+        '5 herramientas sin coste ni claves; lectura de ficheros y listado de directorio con sandboxing real contra path traversal.',
         'Validado en real contra el Ollama de producción de IADocuments, encadenando dos herramientas con datos reales.',
       ],
       en: [
-        'Custom ReAct loop: robust JSON parsing, chaining multiple tools within a single task, tool-error handling that doesn\'t crash the run.',
-        '5 free, keyless tools: weather, GitHub repo info, calculator, file reading and directory listing (the latter two with real path-traversal sandboxing).',
+        '5 free, keyless tools; file reading and directory listing with real path-traversal sandboxing.',
         'Validated live against IADocuments\' production Ollama instance, chaining two tools with real data.',
       ],
     },
-    tech: ['TypeScript', 'Node.js', 'Ollama', 'Jest'],
+    tech: ['TypeScript', 'Node.js', 'react-agent-loop'],
     links: {
       github: 'https://github.com/JuanMiguelAbellan/agent-cli',
     },
