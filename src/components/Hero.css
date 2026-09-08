@@ -1,0 +1,55 @@
+.hero {
+  padding-top: 7rem;
+  padding-bottom: 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -10rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rem;
+  height: 22rem;
+  background: radial-gradient(ellipse at center, var(--accent-dim), transparent 70%);
+  pointer-events: none;
+}
+
+.hero_interior {
+  position: relative;
+  max-width: 46rem;
+}
+
+.hero_saludo {
+  color: var(--accent);
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.hero_nombre {
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  margin-bottom: 0.75rem;
+}
+
+.hero_tagline {
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  color: var(--text-heading);
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+}
+
+.hero_descripcion {
+  font-size: 1.02rem;
+  color: var(--text-muted);
+  max-width: 38rem;
+  line-height: 1.65;
+  margin-bottom: 2.25rem;
+}
+
+.hero_acciones {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
