@@ -1,5 +1,32 @@
 export const projects = [
   {
+    id: 'reciclab2b',
+    featured: false,
+    title: 'ReciclaB2B',
+    description: {
+      es: 'Plataforma B2B para conectar generadores de material reciclable con compradores, distribuidores e industrias: ofertas con control de inventario, mercado con mapa y filtros, mensajería en tiempo real por oferta, y pedidos con ciclo de vida completo.',
+      en: 'B2B platform connecting recyclable-material generators with buyers, distributors and industries: inventory-controlled offers, a marketplace with map and filters, real-time per-offer messaging, and full order lifecycle management.',
+    },
+    highlights: {
+      es: [
+        'Desarrollado por fases con dos auditorías de seguridad propias: encontré y cerré un bug de silent-denial que bloqueaba a cualquier miembro no-principal de una empresa, y una escalada de privilegios real en el panel de administración — ambos con tests que fallaban sin el fix.',
+        'Mensajería en tiempo real por oferta (Laravel Reverb, WebSockets propios) y control de inventario con reintento ante condiciones de carrera al aceptar pedidos.',
+        'Ubicaciones con privacidad: coordenadas exactas solo visibles para el propietario, aproximadas (desplazamiento determinista) en el mercado público.',
+        '151 tests, 476 assertions.',
+      ],
+      en: [
+        'Built in phases with two self-run security audits: found and closed a silent-denial bug blocking any non-primary company member, and a real privilege-escalation path in the admin panel — both with tests that failed without the fix.',
+        'Real-time per-offer messaging (Laravel Reverb, self-hosted WebSockets) and inventory control with race-condition-safe order acceptance.',
+        'Privacy-aware locations: exact coordinates visible only to the owner, deterministically offset ones shown on the public marketplace.',
+        '151 tests, 476 assertions.',
+      ],
+    },
+    tech: ['Laravel', 'Inertia.js', 'React', 'TypeScript', 'Filament', 'Laravel Reverb', 'Tailwind'],
+    links: {
+      github: 'https://github.com/JuanMiguelAbellan/reciclab2b',
+    },
+  },
+  {
     id: 'iadocuments',
     featured: true,
     title: 'IADocuments',
