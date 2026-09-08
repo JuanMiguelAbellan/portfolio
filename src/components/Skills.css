@@ -1,0 +1,17 @@
+.skills_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+
+.skills_categoria {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 0.9rem;
+}
+
+.skills_chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

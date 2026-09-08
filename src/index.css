@@ -1,0 +1,127 @@
+:root {
+  --bg: #0b0d12;
+  --bg-raised: #12151c;
+  --bg-card: #151922;
+  --border: #232834;
+  --text: #c7ccd6;
+  --text-muted: #838b9c;
+  --text-heading: #f3f5f8;
+  --accent: #5eead4;
+  --accent-dim: rgba(94, 234, 212, 0.12);
+  --accent-strong: #2dd4bf;
+
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+
+  --max-width: 960px;
+
+  color-scheme: dark;
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  color: var(--text-heading);
+  margin: 0;
+  line-height: 1.2;
+}
+
+p { margin: 0; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+code, .mono {
+  font-family: var(--font-mono);
+}
+
+section {
+  padding: 5rem 1.5rem;
+}
+
+.contenedor {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.etiqueta_seccion {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.etiqueta_seccion::before {
+  content: '';
+  width: 1.5rem;
+  height: 1px;
+  background: var(--accent);
+}
+
+.titulo_seccion {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  margin-bottom: 2.5rem;
+}
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.boton:hover { transform: translateY(-1px); }
+
+.boton_primario {
+  background: var(--accent);
+  color: #06120f;
+}
+
+.boton_primario:hover { background: var(--accent-strong); }
+
+.boton_secundario {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text-heading);
+}
+
+.boton_secundario:hover { border-color: var(--accent); }
+
+.chip {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+@media (max-width: 640px) {
+  section { padding: 3.5rem 1.25rem; }
+}

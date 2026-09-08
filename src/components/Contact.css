@@ -1,0 +1,28 @@
+.contacto_interior {
+  text-align: center;
+  max-width: 32rem;
+}
+
+.contacto_interior .etiqueta_seccion,
+.contacto_interior .titulo_seccion {
+  justify-content: center;
+  display: flex;
+}
+
+.contacto_texto {
+  color: var(--text-muted);
+  font-size: 1.02rem;
+  margin: 1rem 0 2rem;
+  line-height: 1.6;
+}
+
+.contacto_acciones {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contacto_acciones button {
+  font-family: var(--font-body);
+}
