@@ -23,6 +23,7 @@ export const projects = [
     },
     tech: ['Laravel', 'Inertia.js', 'React', 'TypeScript', 'Filament', 'Laravel Reverb', 'Tailwind'],
     links: {
+      demo: 'https://web-production-4d6ac.up.railway.app',
       github: 'https://github.com/JuanMiguelAbellan/reciclab2b',
     },
   },
