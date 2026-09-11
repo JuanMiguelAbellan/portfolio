@@ -8,29 +8,34 @@ export default function ProjectCard({ project }) {
 
   return (
     <article className={`tarjeta_proyecto ${project.featured ? 'tarjeta_proyecto--destacado' : ''}`}>
-      {project.featured && <p className="tarjeta_proyecto_etiqueta mono">{t.projects.featuredLabel}</p>}
-      <h3 className="tarjeta_proyecto_titulo">{titulo}</h3>
-      <p className="tarjeta_proyecto_desc">{project.description[lang]}</p>
-
-      {project.highlights && (
-        <ul className="tarjeta_proyecto_highlights">
-          {project.highlights[lang].map((h, i) => <li key={i}>{h}</li>)}
-        </ul>
+      {project.preview && (
+        <div className="tarjeta_proyecto_preview" style={{ backgroundImage: `url(${project.preview})` }} />
       )}
+      <div className="tarjeta_proyecto_contenido">
+        {project.featured && <p className="tarjeta_proyecto_etiqueta mono">{t.projects.featuredLabel}</p>}
+        <h3 className="tarjeta_proyecto_titulo">{titulo}</h3>
+        <p className="tarjeta_proyecto_desc">{project.description[lang]}</p>
 
-      <div className="tarjeta_proyecto_tech">
-        {project.tech.map((tech) => <span key={tech} className="chip">{tech}</span>)}
-      </div>
-
-      <div className="tarjeta_proyecto_links">
-        {project.links.demo && (
-          <a href={project.links.demo} target="_blank" rel="noreferrer" className="boton boton_primario">
-            {t.projects.demo} <ExternalLinkIcon />
-          </a>
+        {project.highlights && (
+          <ul className="tarjeta_proyecto_highlights">
+            {project.highlights[lang].map((h, i) => <li key={i}>{h}</li>)}
+          </ul>
         )}
-        <a href={project.links.github} target="_blank" rel="noreferrer" className="boton boton_secundario">
-          <GitHubIcon /> {t.projects.code}
-        </a>
+
+        <div className="tarjeta_proyecto_tech">
+          {project.tech.map((tech) => <span key={tech} className="chip">{tech}</span>)}
+        </div>
+
+        <div className="tarjeta_proyecto_links">
+          {project.links.demo && (
+            <a href={project.links.demo} target="_blank" rel="noreferrer" className="boton boton_primario">
+              {t.projects.demo} <ExternalLinkIcon />
+            </a>
+          )}
+          <a href={project.links.github} target="_blank" rel="noreferrer" className="boton boton_secundario">
+            <GitHubIcon /> {t.projects.code}
+          </a>
+        </div>
       </div>
     </article>
   )

@@ -1,8 +1,15 @@
+import previewReciclab2b from '../assets/previews/reciclab2b.webp'
+import previewIadocuments from '../assets/previews/iadocuments.webp'
+import previewReactAgentLoop from '../assets/previews/react-agent-loop.webp'
+import previewAgentCli from '../assets/previews/agent-cli.webp'
+import previewAutoencoders from '../assets/previews/autoencoders.webp'
+
 export const projects = [
   {
     id: 'reciclab2b',
     featured: false,
     title: 'ReciclaB2B',
+    preview: previewReciclab2b,
     description: {
       es: 'Plataforma B2B para conectar generadores de material reciclable con compradores, distribuidores e industrias: ofertas con control de inventario, mercado con mapa y filtros, mensajería en tiempo real por oferta, y pedidos con ciclo de vida completo.',
       en: 'B2B platform connecting recyclable-material generators with buyers, distributors and industries: inventory-controlled offers, a marketplace with map and filters, real-time per-offer messaging, and full order lifecycle management.',
@@ -33,6 +40,7 @@ export const projects = [
     id: 'iadocuments',
     featured: true,
     title: 'IADocuments',
+    preview: previewIadocuments,
     description: {
       es: 'Asistente de IA para trabajar con tus propios documentos. Sube un PDF, pregúntale directamente sobre su contenido y edítalo con anotaciones nativas — con un modelo de lenguaje autoalojado, sin depender de una API de terceros.',
       en: 'AI assistant for working with your own documents. Upload a PDF, ask it directly about its content, and annotate it natively — powered by a self-hosted language model, with no third-party API dependency.',
@@ -63,6 +71,7 @@ export const projects = [
     id: 'react-agent-loop',
     featured: false,
     title: 'react-agent-loop',
+    preview: previewReactAgentLoop,
     description: {
       es: 'Paquete open source publicado en npm: un bucle de agente con patrón ReAct, sin dependencias, para cualquier cliente de chat. Lo extraje de agent-cli (más abajo) al darme cuenta de que el bucle no tenía nada específico de mi CLI — así que ahora agent-cli depende de este paquete, no al revés.',
       en: 'Open source package published on npm: a dependency-free ReAct-pattern agent loop for any chat client. Extracted out of agent-cli (below) once I realized the loop itself had nothing CLI-specific about it — agent-cli now depends on this package, not the other way around.',
@@ -89,6 +98,7 @@ export const projects = [
     id: 'agent-cli',
     featured: false,
     title: 'agent-cli',
+    preview: previewAgentCli,
     description: {
       es: 'Agente de línea de comandos con uso de herramientas reales (tiempo, GitHub, ficheros, cálculo) sobre un LLM autoalojado, construido sobre react-agent-loop (arriba).',
       en: 'Command-line agent with real tool use (weather, GitHub, files, calculator) over a self-hosted LLM, built on top of react-agent-loop (above).',
@@ -112,6 +122,7 @@ export const projects = [
     id: 'autoencoders',
     featured: false,
     title: 'Detección de anomalías con Autoencoders',
+    preview: previewAutoencoders,
     titleEn: 'Network Anomaly Detection with Autoencoders',
     description: {
       es: 'Sistema de detección de anomalías en tráfico de red mediante autoencoders y variational autoencoders, entrenados de forma no supervisada para detectar comportamiento de proceso anómalo por error de reconstrucción. Desarrollado durante mis prácticas de grado en un contexto real de ciberseguridad.',
