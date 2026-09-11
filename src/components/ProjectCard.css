@@ -19,15 +19,27 @@
    aspecto (1200x750) en todas las tarjetas — es solo textura decorativa
    de fondo, así que no necesita ser nítida ni legible. Escalada un poco
    por encima del 100% para que el desenfoque no deje ver el borde de la
-   imagen original. */
+   imagen original.
+   Altura fija (no "inset: 0") y a propósito: en la rejilla, las tarjetas
+   cortas (agent-cli, react-agent-loop) se estiran por CSS Grid hasta
+   igualar la altura de la más alta (ReciclaB2B) — si la imagen cubriera
+   toda esa caja ya estirada, "cover" la recortaría/ampliaría de forma
+   muy distinta según lo alta que acabe siendo cada tarjeta. Con una
+   banda de altura fija, "cover" solo tiene en cuenta el ancho real de
+   la tarjeta, así que el recorte/zoom es consistente entre todas.
+*/
 .tarjeta_proyecto_preview {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
   z-index: 0;
   background-size: cover;
   background-position: center top;
   filter: blur(14px) brightness(0.55) saturate(1.1);
   transform: scale(1.15);
+  transform-origin: top;
 }
 
 /* Capa de contraste, aparte de la imagen para no heredar su desenfoque —
