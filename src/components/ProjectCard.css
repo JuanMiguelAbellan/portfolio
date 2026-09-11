@@ -1,16 +1,58 @@
 .tarjeta_proyecto {
+  position: relative;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  overflow: hidden;
+  isolation: isolate;
 }
 
 .tarjeta_proyecto--destacado {
   border-color: rgba(94, 234, 212, 0.35);
-  background: linear-gradient(180deg, rgba(94, 234, 212, 0.05), var(--bg-card) 40%);
+}
+
+.tarjeta_proyecto--destacado::before {
+  background: linear-gradient(180deg, rgba(94, 234, 212, 0.14), rgba(11, 13, 18, 0.6) 140px, var(--bg-card) 280px);
+}
+
+/* Captura de la app en cuestión, difuminada y con la misma relación de
+   aspecto (1200x750) en todas las tarjetas — es solo textura decorativa
+   de fondo, así que no necesita ser nítida ni legible. Escalada un poco
+   por encima del 100% para que el desenfoque no deje ver el borde de la
+   imagen original. */
+.tarjeta_proyecto_preview {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center top;
+  filter: blur(14px) brightness(0.55) saturate(1.1);
+  transform: scale(1.15);
+}
+
+/* Capa de contraste, aparte de la imagen para no heredar su desenfoque —
+   sin esto el texto pierde legibilidad encima de zonas claras de la captura.
+   z-index explícito en las tres capas (imagen/velo/contenido) para no
+   depender del orden implícito de pintado entre un div y un ::before.
+   Alturas en px (no %) para que la banda visible de la imagen mida lo
+   mismo en todas las tarjetas, tengan la altura que tengan según su
+   contenido — con % una tarjeta corta queda casi entera cubierta y una
+   larga solo se ve difuminada en una fina franja arriba. */
+.tarjeta_proyecto::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(11, 13, 18, 0.45), rgba(11, 13, 18, 0.7) 140px, var(--bg-card) 280px);
+}
+
+.tarjeta_proyecto_contenido {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .tarjeta_proyecto_etiqueta {
