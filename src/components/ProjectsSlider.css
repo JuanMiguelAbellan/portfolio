@@ -1,0 +1,82 @@
+:root {
+  --tarjeta-ancho: 380px;
+}
+
+.carrusel_proyectos {
+  position: relative;
+}
+
+.carrusel_proyectos_viewport {
+  overflow: hidden;
+  /* Máscara de desvanecido en los bordes: señala que hay más tarjetas
+     fuera de la vista sin necesitar una flecha superpuesta sobre la
+     imagen. mask-image tiene mejor soporte que -webkit- a estas alturas,
+     pero se incluye el prefijo por Safari. */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  padding: 0.5rem 0;
+}
+
+.carrusel_proyectos_track {
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
+  padding: 0 1.5rem;
+  touch-action: pan-y;
+  cursor: grab;
+  will-change: transform;
+}
+
+.carrusel_proyectos_track:active {
+  cursor: grabbing;
+}
+
+/* Evita que el arrastre del carrusel seleccione texto de las tarjetas
+   por accidente (comportamiento nativo del navegador al hacer drag). */
+.carrusel_proyectos_track * {
+  user-select: none;
+}
+
+.carrusel_proyectos_controles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.carrusel_proyectos_boton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-raised);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.carrusel_proyectos_boton:hover,
+.carrusel_proyectos_boton:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.carrusel_proyectos_boton[aria-pressed='true'] {
+  color: var(--accent);
+  border-color: rgba(94, 234, 212, 0.4);
+}
+
+@media (max-width: 640px) {
+  :root {
+    --tarjeta-ancho: min(86vw, 340px);
+  }
+
+  .carrusel_proyectos_track {
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+}
