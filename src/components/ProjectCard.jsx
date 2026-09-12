@@ -1,42 +1,44 @@
 import { useLanguage } from '../i18n/LanguageContext'
-import { GitHubIcon, ExternalLinkIcon } from './Icons'
+import { ChevronRightIcon } from './Icons'
 import './ProjectCard.css'
 
-export default function ProjectCard({ project }) {
+const TECH_VISIBLES = 3
+
+export default function ProjectCard({ project, onOpen, duplicado = false }) {
   const { lang, t } = useLanguage()
   const titulo = lang === 'en' && project.titleEn ? project.titleEn : project.title
+  const techVisible = project.tech.slice(0, TECH_VISIBLES)
+  const techRestantes = project.tech.length - techVisible.length
 
   return (
-    <article className={`tarjeta_proyecto ${project.featured ? 'tarjeta_proyecto--destacado' : ''}`}>
-      {project.preview && (
-        <div className="tarjeta_proyecto_preview" style={{ backgroundImage: `url(${project.preview})` }} />
-      )}
-      <div className="tarjeta_proyecto_contenido">
-        {project.featured && <p className="tarjeta_proyecto_etiqueta mono">{t.projects.featuredLabel}</p>}
-        <h3 className="tarjeta_proyecto_titulo">{titulo}</h3>
-        <p className="tarjeta_proyecto_desc">{project.description[lang]}</p>
+    <button
+      type="button"
+      className={`tarjeta_proyecto ${project.featured ? 'tarjeta_proyecto--destacado' : ''}`}
+      onClick={(e) => onOpen(project, e.currentTarget)}
+      aria-label={`${t.projects.openDetails} ${titulo}`}
+      // La segunda copia de cada proyecto (necesaria para que el bucle del
+      // carrusel sea indetectable, ver ProjectsSlider) es puramente visual:
+      // sin esto, tabular por teclado o un lector de pantalla encontraría
+      // cada proyecto dos veces.
+      aria-hidden={duplicado || undefined}
+      tabIndex={duplicado ? -1 : undefined}
+    >
+      <div className="tarjeta_proyecto_imagen">
+        {project.preview && <img src={project.preview} alt="" loading="lazy" />}
+        {project.featured && <span className="tarjeta_proyecto_etiqueta mono">{t.projects.featuredLabel}</span>}
+      </div>
 
-        {project.highlights && (
-          <ul className="tarjeta_proyecto_highlights">
-            {project.highlights[lang].map((h, i) => <li key={i}>{h}</li>)}
-          </ul>
-        )}
+      <div className="tarjeta_proyecto_contenido">
+        <h3 className="tarjeta_proyecto_titulo">{titulo}</h3>
+        <p className="tarjeta_proyecto_resumen">{project.summary[lang]}</p>
 
         <div className="tarjeta_proyecto_tech">
-          {project.tech.map((tech) => <span key={tech} className="chip">{tech}</span>)}
-        </div>
-
-        <div className="tarjeta_proyecto_links">
-          {project.links.demo && (
-            <a href={project.links.demo} target="_blank" rel="noreferrer" className="boton boton_primario">
-              {t.projects.demo} <ExternalLinkIcon />
-            </a>
-          )}
-          <a href={project.links.github} target="_blank" rel="noreferrer" className="boton boton_secundario">
-            <GitHubIcon /> {t.projects.code}
-          </a>
+          {techVisible.map((tech) => <span key={tech} className="chip">{tech}</span>)}
+          {techRestantes > 0 && <span className="chip chip_mas">+{techRestantes}</span>}
         </div>
       </div>
-    </article>
+
+      <ChevronRightIcon className="tarjeta_proyecto_flecha" aria-hidden="true" />
+    </button>
   )
 }

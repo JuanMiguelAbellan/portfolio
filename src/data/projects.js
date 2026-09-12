@@ -10,6 +10,10 @@ export const projects = [
     featured: false,
     title: 'ReciclaB2B',
     preview: previewReciclab2b,
+    summary: {
+      es: 'Mercado B2B de material reciclable con mensajería en tiempo real y control de inventario.',
+      en: 'B2B recyclable-material marketplace with real-time messaging and inventory control.',
+    },
     description: {
       es: 'Plataforma B2B para conectar generadores de material reciclable con compradores, distribuidores e industrias: ofertas con control de inventario, mercado con mapa y filtros, mensajería en tiempo real por oferta, y pedidos con ciclo de vida completo.',
       en: 'B2B platform connecting recyclable-material generators with buyers, distributors and industries: inventory-controlled offers, a marketplace with map and filters, real-time per-offer messaging, and full order lifecycle management.',
@@ -41,6 +45,10 @@ export const projects = [
     featured: true,
     title: 'IADocuments',
     preview: previewIadocuments,
+    summary: {
+      es: 'Asistente de IA autoalojado para preguntar, anotar y editar tus propios PDFs.',
+      en: 'Self-hosted AI assistant to ask, annotate and edit your own PDFs.',
+    },
     description: {
       es: 'Asistente de IA para trabajar con tus propios documentos. Sube un PDF, pregúntale directamente sobre su contenido y edítalo con anotaciones nativas — con un modelo de lenguaje autoalojado, sin depender de una API de terceros.',
       en: 'AI assistant for working with your own documents. Upload a PDF, ask it directly about its content, and annotate it natively — powered by a self-hosted language model, with no third-party API dependency.',
@@ -72,6 +80,10 @@ export const projects = [
     featured: false,
     title: 'react-agent-loop',
     preview: previewReactAgentLoop,
+    summary: {
+      es: 'Paquete npm sin dependencias: bucle de agente ReAct para cualquier cliente de chat.',
+      en: 'Dependency-free npm package: a ReAct agent loop for any chat client.',
+    },
     description: {
       es: 'Paquete open source publicado en npm: un bucle de agente con patrón ReAct, sin dependencias, para cualquier cliente de chat. Lo extraje de agent-cli (más abajo) al darme cuenta de que el bucle no tenía nada específico de mi CLI — así que ahora agent-cli depende de este paquete, no al revés.',
       en: 'Open source package published on npm: a dependency-free ReAct-pattern agent loop for any chat client. Extracted out of agent-cli (below) once I realized the loop itself had nothing CLI-specific about it — agent-cli now depends on this package, not the other way around.',
@@ -99,6 +111,10 @@ export const projects = [
     featured: false,
     title: 'agent-cli',
     preview: previewAgentCli,
+    summary: {
+      es: 'Agente de terminal con uso real de herramientas sobre un LLM autoalojado.',
+      en: 'Terminal agent with real tool use over a self-hosted LLM.',
+    },
     description: {
       es: 'Agente de línea de comandos con uso de herramientas reales (tiempo, GitHub, ficheros, cálculo) sobre un LLM autoalojado, construido sobre react-agent-loop (arriba).',
       en: 'Command-line agent with real tool use (weather, GitHub, files, calculator) over a self-hosted LLM, built on top of react-agent-loop (above).',
@@ -124,6 +140,10 @@ export const projects = [
     title: 'Detección de anomalías con Autoencoders',
     preview: previewAutoencoders,
     titleEn: 'Network Anomaly Detection with Autoencoders',
+    summary: {
+      es: 'Autoencoders no supervisados para detectar tráfico de red anómalo, con demo en el navegador.',
+      en: 'Unsupervised autoencoders flagging anomalous network traffic, with an in-browser demo.',
+    },
     description: {
       es: 'Sistema de detección de anomalías en tráfico de red mediante autoencoders y variational autoencoders, entrenados de forma no supervisada para detectar comportamiento de proceso anómalo por error de reconstrucción. Desarrollado durante mis prácticas de grado en un contexto real de ciberseguridad.',
       en: 'Network traffic anomaly detection system using autoencoders and variational autoencoders, trained unsupervised to flag anomalous process behavior via reconstruction error. Built during my degree internship in a real cybersecurity context.',

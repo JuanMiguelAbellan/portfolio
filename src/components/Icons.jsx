@@ -30,3 +30,44 @@ export function ExternalLinkIcon(props) {
     </svg>
   )
 }
+
+export function ChevronLeftIcon(props) {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="m15 18-6-6 6-6" />
+    </svg>
+  )
+}
+
+export function ChevronRightIcon(props) {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="m9 18 6-6-6-6" />
+    </svg>
+  )
+}
+
+export function CloseIcon(props) {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
+      <path strokeLinecap="round" d="M6 6l12 12M18 6 6 18" />
+    </svg>
+  )
+}
+
+export function PauseIcon(props) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <rect x="6" y="5" width="4" height="14" rx="1" />
+      <rect x="14" y="5" width="4" height="14" rx="1" />
+    </svg>
+  )
+}
+
+export function PlayIcon(props) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M7 5.5v13a1 1 0 0 0 1.53.85l10.5-6.5a1 1 0 0 0 0-1.7l-10.5-6.5A1 1 0 0 0 7 5.5Z" />
+    </svg>
+  )
+}

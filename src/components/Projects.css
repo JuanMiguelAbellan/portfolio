@@ -1,5 +1,15 @@
-.proyectos_grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+/* El carrusel bebe hasta el borde real de la pantalla (no se queda
+   dentro de .contenedor, a diferencia del título de la sección) para
+   aprovechar el ancho completo y mostrar más tarjetas a la vez —
+   cancela el padding lateral propio de <section> (ver index.css) y lo
+   repone como padding del track interno (ProjectsSlider.css) para que
+   la primera tarjeta no quede pegada al borde. */
+#proyectos .carrusel_proyectos {
+  margin-inline: -1.5rem;
+}
+
+@media (max-width: 640px) {
+  #proyectos .carrusel_proyectos {
+    margin-inline: -1.25rem;
+  }
 }
