@@ -85,8 +85,8 @@ export const projects = [
       en: 'Dependency-free npm package: a ReAct agent loop for any chat client.',
     },
     description: {
-      es: 'Paquete open source publicado en npm: un bucle de agente con patrón ReAct, sin dependencias, para cualquier cliente de chat. Lo extraje de agent-cli (más abajo) al darme cuenta de que el bucle no tenía nada específico de mi CLI — así que ahora agent-cli depende de este paquete, no al revés.',
-      en: 'Open source package published on npm: a dependency-free ReAct-pattern agent loop for any chat client. Extracted out of agent-cli (below) once I realized the loop itself had nothing CLI-specific about it — agent-cli now depends on this package, not the other way around.',
+      es: 'Paquete open source publicado en npm: un bucle de agente con patrón ReAct, sin dependencias, para cualquier cliente de chat. Lo extraje de agent-cli al darme cuenta de que el bucle no tenía nada específico de mi CLI — así que ahora agent-cli depende de este paquete, no al revés.',
+      en: 'Open source package published on npm: a dependency-free ReAct-pattern agent loop for any chat client. Extracted out of agent-cli once I realized the loop itself had nothing CLI-specific about it — agent-cli now depends on this package, not the other way around.',
     },
     highlights: {
       es: [
@@ -116,8 +116,8 @@ export const projects = [
       en: 'Terminal agent with real tool use over a self-hosted LLM.',
     },
     description: {
-      es: 'Agente de línea de comandos con uso de herramientas reales (tiempo, GitHub, ficheros, cálculo) sobre un LLM autoalojado, construido sobre react-agent-loop (arriba).',
-      en: 'Command-line agent with real tool use (weather, GitHub, files, calculator) over a self-hosted LLM, built on top of react-agent-loop (above).',
+      es: 'Agente de línea de comandos con uso de herramientas reales (tiempo, GitHub, ficheros, cálculo) sobre un LLM autoalojado, construido sobre react-agent-loop.',
+      en: 'Command-line agent with real tool use (weather, GitHub, files, calculator) over a self-hosted LLM, built on top of react-agent-loop.',
     },
     highlights: {
       es: [
@@ -163,9 +163,12 @@ export const projects = [
       ],
     },
     tech: ['Python', 'TensorFlow/Keras', 'scikit-learn', 'pandas'],
+    // El repo sigue privado (su historial de git aún contiene telemetría real
+    // de las prácticas). Cuando sea público: volver a poner `github` y quitar
+    // `repoPending`.
+    repoPending: true,
     links: {
       demo: 'https://anomaly-detection-demo-jmabellan.vercel.app',
-      github: 'https://github.com/JuanMiguelAbellan/autoencoders',
     },
   },
 ]
