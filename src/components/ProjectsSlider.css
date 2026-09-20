@@ -1,5 +1,5 @@
 :root {
-  --tarjeta-ancho: 380px;
+  --tarjeta-ancho: 460px;
 }
 
 .carrusel_proyectos {
@@ -19,9 +19,9 @@
 
 .carrusel_proyectos_track {
   display: flex;
-  gap: 1.25rem;
+  gap: 1.5rem;
   width: max-content;
-  padding: 0 1.5rem;
+  padding: 0.5rem 1.5rem;
   touch-action: pan-y;
   cursor: grab;
   will-change: transform;
@@ -72,11 +72,11 @@
 
 @media (max-width: 640px) {
   :root {
-    --tarjeta-ancho: min(86vw, 340px);
+    --tarjeta-ancho: min(90vw, 380px);
   }
 
   .carrusel_proyectos_track {
-    padding: 0 1rem;
+    padding: 0.5rem 1rem;
     gap: 1rem;
   }
 }
