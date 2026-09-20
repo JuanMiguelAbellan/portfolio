@@ -87,9 +87,15 @@ export default function ProjectModal({ project, onClose, triggerRef }) {
                 {t.projects.demo} <ExternalLinkIcon />
               </a>
             )}
-            <a href={project.links.github} target="_blank" rel="noreferrer" className="boton boton_secundario">
-              <GitHubIcon /> {t.projects.code}
-            </a>
+            {project.links.github ? (
+              <a href={project.links.github} target="_blank" rel="noreferrer" className="boton boton_secundario">
+                <GitHubIcon /> {t.projects.code}
+              </a>
+            ) : project.repoPending ? (
+              <span className="boton boton_secundario boton_desactivado" aria-disabled="true">
+                <GitHubIcon /> {t.projects.comingSoon}
+              </span>
+            ) : null}
           </div>
         </div>
       </div>
