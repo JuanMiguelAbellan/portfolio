@@ -7,6 +7,10 @@ import './ProjectsSlider.css'
 const SPEED_PX_PER_SEC = 36 // lento a propósito: da tiempo a leer el título al pasar
 const DRAG_CLICK_THRESHOLD = 6 // px — por debajo de esto, un arrastre corto se trata como click
 const INTERACTION_PAUSE_MS = 2500 // pausa tras arrastrar o usar las flechas, antes de retomar el autoplay
+const ARROW_GLIDE_MS = 520 // duración del deslizamiento de una flecha (una tarjeta)
+
+// Aceleración y frenada suaves: sin esto el movimiento arranca y se detiene en seco.
+const easeInOutCubic = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2)
 
 function prefiereMenosMovimiento() {
   try {
@@ -44,6 +48,8 @@ export default function ProjectsSlider({ projects, onOpenProject, paused = false
   const dragDistanceRef = useRef(0)
   const suppressClickRef = useRef(false)
   const interactionTimeoutRef = useRef(null)
+  // Deslizamiento en curso de una flecha: { from, to, start } — `from`/`to` sin normalizar; start se fija en el primer frame.
+  const glideRef = useRef(null)
 
   const [manuallyPaused, setManuallyPaused] = useState(() => prefiereMenosMovimiento())
 
@@ -92,6 +98,18 @@ export default function ProjectsSlider({ projects, onOpenProject, paused = false
       lastTsRef.current = ts
 
       const f = flagsRef.current
+      const glide = glideRef.current
+      if (glide && setWidthRef.current > 0) {
+        // Un deslizamiento de flecha avanza siempre, aunque el carrusel esté en pausa o con el ratón encima
+        // (el ratón está justo sobre la flecha que se acaba de pulsar).
+        if (glide.start == null) glide.start = ts
+        const p = Math.min(1, (ts - glide.start) / ARROW_GLIDE_MS)
+        offsetRef.current = normalize(glide.from + (glide.to - glide.from) * easeInOutCubic(p))
+        applyTransform()
+        if (p >= 1) glideRef.current = null
+        rafRef.current = requestAnimationFrame(tick)
+        return
+      }
       const detenido = f.hover || f.focus || f.drag || f.manual || f.external || f.interaction
       if (!detenido && setWidthRef.current > 0) {
         offsetRef.current = normalize(offsetRef.current - SPEED_PX_PER_SEC * dt)
@@ -115,9 +133,17 @@ export default function ProjectsSlider({ projects, onOpenProject, paused = false
     const total = projects.length
     if (total === 0 || setWidthRef.current === 0) return
     const anchoTarjeta = setWidthRef.current / total
-    offsetRef.current = normalize(offsetRef.current - direccion * anchoTarjeta)
-    applyTransform()
     marcarInteraccion()
+    if (prefiereMenosMovimiento()) {
+      // Quien pide menos movimiento recibe el cambio directo, sin deslizamiento.
+      offsetRef.current = normalize(offsetRef.current - direccion * anchoTarjeta)
+      applyTransform()
+      return
+    }
+    // Pulsaciones seguidas se acumulan: el destino se suma al del deslizamiento en curso, y el nuevo tramo
+    // parte de la posición visible actual, así que no hay saltos ni se pierde ningún clic.
+    const base = glideRef.current ? glideRef.current.to : offsetRef.current
+    glideRef.current = { from: offsetRef.current, to: base - direccion * anchoTarjeta, start: null }
   }
 
   function alternarPausaManual() {
@@ -128,6 +154,7 @@ export default function ProjectsSlider({ projects, onOpenProject, paused = false
   }
 
   function onPointerDown(e) {
+    glideRef.current = null // agarrar el carrusel detiene cualquier deslizamiento y lo toma desde donde esté
     flagsRef.current.drag = true
     dragStartXRef.current = e.clientX
     dragStartOffsetRef.current = offsetRef.current
