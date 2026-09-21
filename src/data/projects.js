@@ -4,6 +4,8 @@ import previewReactAgentLoop from '../assets/previews/react-agent-loop.webp'
 import previewAgentCli from '../assets/previews/agent-cli.webp'
 import previewAutoencoders from '../assets/previews/autoencoders.webp'
 import previewRagEval from '../assets/previews/rag-eval.webp'
+import previewReservas from '../assets/previews/reservas.webp'
+import previewTablero from '../assets/previews/tablero.webp'
 import previewDocsSearchMcp from '../assets/previews/docs-search-mcp.webp'
 
 export const projects = [
@@ -75,6 +77,80 @@ export const projects = [
     links: {
       demo: 'https://iadocuments-jmabellan.vercel.app',
       github: 'https://github.com/JuanMiguelAbellan/Proyecto-2-DAW',
+    },
+  },
+  {
+    id: 'reservas',
+    featured: false,
+    title: 'Reservas',
+    preview: previewReservas,
+    summary: {
+      es: 'Reservas multi-negocio donde el doble booking es imposible: lo garantiza PostgreSQL, no el código.',
+      en: 'Multi-business booking system where double booking is impossible: PostgreSQL guarantees it, not the code.',
+    },
+    description: {
+      es: 'Sistema de reservas para varios negocios: cada uno tiene su página pública, servicios, horarios y recursos (personas, pistas, salas). Los clientes reservan sin cuenta y los propietarios gestionan todo desde un panel. Me centré en lo difícil: que sea correcto bajo concurrencia, con zonas horarias y con separación estricta entre negocios.',
+      en: 'Booking system for multiple businesses: each has its own public page, services, opening hours and resources (people, courts, rooms). Customers book without an account and owners manage everything from a dashboard. I focused on the hard part: being correct under concurrency, across time zones, and with strict separation between businesses.',
+    },
+    highlights: {
+      es: [
+        'El doble booking es imposible por diseño: una restricción de exclusión de PostgreSQL sobre rangos de tiempo impide dos reservas solapadas del mismo recurso, haga lo que haga la aplicación. Los tests lanzan 20 peticiones simultáneas al mismo hueco: con un recurso gana exactamente 1, con tres ganan exactamente 3.',
+        'Bug encontrado midiendo: con la restricción sola, 19 de 20 peticiones simultáneas morían con un deadlock (40P01) y el test tardaba ~19 s. Un bloqueo de fila sobre el recurso hace que el perdedor reciba el error limpio al instante (~0,1 s).',
+        'Horarios en la zona horaria del negocio y correctos en los cambios de hora (días de 23 y 25 horas), probados en Madrid, zonas con media hora de desfase y el cambio de fecha. Un test E2E carga la página desde un navegador configurado en Tokio y comprueba que sigue viendo las 08:00 de Canarias.',
+        'Multi-tenencia: el negocio siempre sale de la sesión, nunca de la URL ni del formulario; hay tests que intentan tocar datos de otro negocio. Contraseñas con scrypt, sesiones guardadas como hash, bloqueo tras 10 intentos fallidos, sin enumeración de cuentas.',
+        'Recordatorios que no se envían dos veces aunque corran varios procesos a la vez (UPDATE … FOR UPDATE SKIP LOCKED).',
+        '43 tests contra PostgreSQL real más 13 tests E2E con Playwright, cada ejecución sobre una base de datos nueva; CI en GitHub Actions. Los E2E eran intermitentes hasta que descubrí que compartían estado con ejecuciones anteriores.',
+      ],
+      en: [
+        'Double booking is impossible by design: a PostgreSQL exclusion constraint over time ranges refuses two overlapping bookings of the same resource, whatever the application does. Tests fire 20 simultaneous requests at one slot: with one resource exactly 1 wins, with three exactly 3 win.',
+        'A bug found by measuring: with the constraint alone, 19 of 20 simultaneous requests died with a deadlock (40P01) and the test took ~19 s. A row lock on the resource makes the loser get the clean error instantly (~0.1 s).',
+        'Opening hours live in the business time zone and stay correct on daylight-saving changes (23- and 25-hour days), tested on Madrid, half-hour-offset zones and across the date line. An E2E test loads the page from a Tokyo-configured browser and checks it still shows the Canary Islands business\' 08:00.',
+        'Multi-tenancy: the business always comes from the session, never from the URL or a form; tests try to touch another business\' data. scrypt passwords, hashed sessions, lockout after 10 failed logins, no account enumeration.',
+        'Reminders that are never sent twice even with several workers at once (UPDATE … FOR UPDATE SKIP LOCKED).',
+        '43 tests against real PostgreSQL plus 13 Playwright E2E tests, each run on a fresh database; CI on GitHub Actions. The E2E suite was flaky until I found it shared state with earlier runs.',
+      ],
+    },
+    tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Playwright', 'Docker', 'GitHub Actions', 'Railway'],
+    links: {
+      demo: 'https://web-production-acd80.up.railway.app',
+      github: 'https://github.com/JuanMiguelAbellan/reservas',
+    },
+  },
+  {
+    id: 'tablero',
+    featured: false,
+    title: 'Tablero',
+    preview: previewTablero,
+    summary: {
+      es: 'Kanban colaborativo: varias personas editan a la vez, ven los cambios en vivo y trabajan aunque se caiga la red.',
+      en: 'Collaborative Kanban: several people edit at once, see changes live, and keep working when the network drops.',
+    },
+    description: {
+      es: 'Tablero Kanban en tiempo real. Se arrastran tarjetas con el ratón o con el teclado, se comparten tableros con enlaces de invitación (editor o solo lectura) y todo se sincroniza entre personas al instante. Me centré en qué pasa cuando editan varias personas a la vez y la red falla.',
+      en: 'Real-time Kanban board. Cards are dragged with the mouse or the keyboard, boards are shared through invite links (editor or read-only) and everything syncs between people instantly. I focused on what happens when several people edit at once and the network fails.',
+    },
+    highlights: {
+      es: [
+        'Tiempo real con Server-Sent Events sobre un registro de cambios: cada cambio se guarda en la misma transacción que los datos, y un cliente que se reconecta pide «todo lo posterior al evento N», sin huecos ni repetidos. PostgreSQL LISTEN/NOTIFY solo avisa; la entrega se guía por la tabla, así que una notificación perdida solo retrasa, nunca pierde. Un test mata la conexión de escucha a mitad de flujo y comprueba que se recupera.',
+        'Interfaz optimista con reconciliación (reductor puro con sus tests): el cambio se ve al instante, se descarta cuando llegan los eventos reales y, si el servidor lo rechaza, la pantalla vuelve a la verdad. Si falla la red se reintenta con el mismo id de operación, que el servidor trata de forma idempotente: nunca se aplica dos veces (test E2E con las peticiones bloqueadas).',
+        'Ordenar sin renumerar: índices fraccionarios, así mover una tarjeta escribe una sola fila. Descubrí que la colación por defecto de PostgreSQL reordenaría las claves en silencio; se corrigió con COLLATE "C" y un test que compara el orden de la base de datos con el de JavaScript.',
+        'Arrastrar y soltar también con teclado, cubierto por un test E2E. Diálogos nativos <dialog> y regiones aria-live.',
+        'Seguridad: defensa CSRF con cabecera propia, membresía comprobada en la misma transacción que el cambio, 404 idéntico para tableros ajenos e inexistentes, invitaciones que caducan y se guardan con hash.',
+        '52 tests contra PostgreSQL real (incluidas 40 escrituras simultáneas en el mismo punto) y 9 tests E2E: dos personas que convergen, modo lectura y trabajo sin conexión. El CI falló una vez solo en GitHub: dnd-kit ignora los clics durante 50 ms tras soltar y la máquina rápida hacía clic dentro de esa ventana.',
+      ],
+      en: [
+        'Real time with Server-Sent Events over a change log: each change is stored in the same transaction as the data, and a reconnecting client asks for "everything after event N", with no gaps and no repeats. PostgreSQL LISTEN/NOTIFY only wakes the server; delivery is driven by the table, so a lost notification can only delay, never lose. A test kills the listening connection mid-stream and checks it recovers.',
+        'Optimistic UI with reconciliation (a pure reducer with its own tests): the change shows instantly, is dropped when the real events arrive, and if the server rejects it the screen falls back to the truth. On network failure it is retried with the same operation id, which the server handles idempotently: never applied twice (E2E test with requests blocked).',
+        'Ordering without renumbering: fractional indexing, so moving a card writes one row. I found that PostgreSQL\'s default collation would silently reorder the keys; fixed with COLLATE "C" and a test comparing the database order with JavaScript\'s.',
+        'Drag and drop also works from the keyboard, covered by an E2E test. Native <dialog>s and aria-live regions.',
+        'Security: CSRF defence with a custom header, membership checked in the same transaction as the change, identical 404 for other people\'s boards and non-existent ones, invites that expire and are stored hashed.',
+        '52 tests against real PostgreSQL (including 40 simultaneous writes at the same spot) and 9 E2E tests: two people converging, read-only mode and working offline. CI failed once, only on GitHub: dnd-kit ignores clicks for 50 ms after a drop and the faster machine clicked inside that window.',
+      ],
+    },
+    tech: ['React', 'Fastify', 'TypeScript', 'PostgreSQL', 'Server-Sent Events', 'Playwright', 'Docker', 'Railway'],
+    links: {
+      demo: 'https://web-production-1e9f.up.railway.app',
+      github: 'https://github.com/JuanMiguelAbellan/tablero',
     },
   },
   {
