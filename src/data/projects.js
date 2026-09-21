@@ -3,6 +3,8 @@ import previewIadocuments from '../assets/previews/iadocuments.webp'
 import previewReactAgentLoop from '../assets/previews/react-agent-loop.webp'
 import previewAgentCli from '../assets/previews/agent-cli.webp'
 import previewAutoencoders from '../assets/previews/autoencoders.webp'
+import previewRagEval from '../assets/previews/rag-eval.webp'
+import previewDocsSearchMcp from '../assets/previews/docs-search-mcp.webp'
 
 export const projects = [
   {
@@ -73,6 +75,76 @@ export const projects = [
     links: {
       demo: 'https://iadocuments-jmabellan.vercel.app',
       github: 'https://github.com/JuanMiguelAbellan/Proyecto-2-DAW',
+    },
+  },
+  {
+    id: 'rag-eval',
+    featured: false,
+    title: 'rag-eval',
+    preview: previewRagEval,
+    summary: {
+      es: 'Mide con estadística real cuánto acierta un RAG. Aplicado a IADocuments: MRR de 0.685 a 0.947.',
+      en: 'Measures how good a RAG pipeline really is, with real statistics. Applied to IADocuments: MRR 0.685 → 0.947.',
+    },
+    description: {
+      es: 'Banco de pruebas para pipelines RAG: puntúa la recuperación y la calidad de las respuestas sobre un conjunto de preguntas verificado a mano, con cualquier estrategia de troceado y cualquier buscador, con intervalos de confianza y en local (Ollama, sin claves de API). Lo construí para responder una pregunta concreta sobre mi propio proyecto: ¿eran buenos los ajustes de IADocuments?',
+      en: 'Test bench for RAG pipelines: scores retrieval and answer quality on a hand-checked question set, over any chunking strategy and any retriever, with confidence intervals, running locally (Ollama, no API keys). I built it to answer one concrete question about my own project: were IADocuments\' settings any good?',
+    },
+    highlights: {
+      es: [
+        'Hallazgo real: el punto débil de IADocuments era el modelo de embeddings, no el troceado. nomic-embed-text (centrado en inglés) perdía en español contra BM25, que no usa ningún modelo (0.685 vs 0.885 de MRR).',
+        'Mejor configuración medida (troceado por párrafos + BM25 + bge-m3 fusionados con RRF): MRR 0.947 y 98.6 % de recall@5, y las respuestas correctas de qwen2.5:3b suben del 81.8 % al 91.8 % (IC 95 % pareado de la mejora: +2.7 a +19.1 puntos).',
+        'Las etiquetas son citas literales, no ids de fragmento, así que se pueden comparar estrategias de troceado distintas de forma justa. Sin LLM como juez: puntuación determinista por hechos clave y abstención explícita.',
+        'Cada diferencia lleva un bootstrap pareado (2000 remuestreos, semilla fija): «mejor» significa que el intervalo excluye el cero.',
+        'Corregí mis propias conclusiones con los datos (el troceado por párrafos no gana siempre) y documenté las limitaciones: un solo anotador, sesgo léxico, un dominio.',
+        '43 tests sin necesidad de Ollama (un servidor HTTP falso lo sustituye).',
+      ],
+      en: [
+        'Real finding: IADocuments\' weak spot was the embedding model, not the chunking. nomic-embed-text (English-centric) lost on Spanish to BM25, which uses no model at all (0.685 vs 0.885 MRR).',
+        'Best measured setup (paragraph chunks + BM25 + bge-m3 fused with RRF): MRR 0.947 and 98.6% recall@5, and qwen2.5:3b\'s correct answers rise from 81.8% to 91.8% (paired 95% CI of the gain: +2.7 to +19.1 points).',
+        'Labels are verbatim quotes, not chunk ids, so different chunking strategies can be compared fairly. No LLM-as-judge: deterministic scoring by key facts and explicit abstention.',
+        'Every difference gets a paired bootstrap (2000 resamples, fixed seed): "better" means the interval excludes zero.',
+        'Corrected my own conclusions against the data (paragraph chunking does not always win) and documented the limits: single annotator, lexical bias, one domain.',
+        '43 tests that need no Ollama (a fake HTTP server stands in).',
+      ],
+    },
+    tech: ['TypeScript', 'Node.js', 'Ollama', 'RAG', 'BM25', 'Embeddings', 'Statistics'],
+    links: {
+      github: 'https://github.com/JuanMiguelAbellan/rag-eval',
+    },
+  },
+  {
+    id: 'docs-search-mcp',
+    featured: false,
+    title: 'docs-search-mcp',
+    preview: previewDocsSearchMcp,
+    summary: {
+      es: 'Servidor MCP de solo lectura para que una IA busque en tus documentos, diseñado desconfiando del propio modelo.',
+      en: 'Read-only MCP server that lets an AI search your documents, designed to distrust the calling model.',
+    },
+    description: {
+      es: 'Servidor MCP (Model Context Protocol) que da a un cliente de IA (Claude Desktop, Claude Code o tu propio agente) tres herramientas para buscar y leer una carpeta de documentos Markdown/texto, con búsqueda híbrida BM25 + embeddings locales. Lo que más cuidé: los argumentos los escribe un LLM y puede haber sido manipulado, así que se tratan como no fiables.',
+      en: 'MCP (Model Context Protocol) server that gives an AI client (Claude Desktop, Claude Code or your own agent) three tools to search and read a folder of Markdown/text documents, with hybrid BM25 + local-embedding search. What I focused on: arguments are written by an LLM that may have been manipulated, so they are treated as untrusted.',
+    },
+    highlights: {
+      es: [
+        'Ningún argumento se usa nunca como ruta de fichero: los documentos se buscan por id en memoria, así que un id como «../../etc/passwd» es simplemente desconocido (probado con rutas relativas, absolutas, de Windows, bytes NUL y URIs con traversal codificado).',
+        'La carpeta servida es un límite de seguridad: los symlinks que salen de ella se ignoran, además de ficheros binarios, enormes o en exceso. Todos los argumentos tienen límites duros validados con zod.',
+        'Herramientas marcadas como solo lectura, con esquema de salida y contenido estructurado. Los errores se devuelven de forma que el modelo pueda corregirse («¿Quisiste decir guides/setup.md?»).',
+        '30 tests, incluido uno de extremo a extremo que lanza el CLI real por stdio. Los propios tests encontraron dos bugs míos (un fichero cargado dos veces vía symlink y un orden que dependía del idioma del sistema).',
+        'Demo con un modelo local de 3B: acierta 1 de 3 preguntas y el README lo cuenta tal cual, sin retocar. El servidor hizo bien su parte; los fallos son del modelo.',
+      ],
+      en: [
+        'No argument is ever used as a file path: documents are looked up by id in memory, so an id like "../../etc/passwd" is simply unknown (tested with relative, absolute, Windows, NUL-byte and percent-encoded traversal URIs).',
+        'The served folder is a security boundary: symlinks that resolve outside it are skipped, as are binary, oversized or excess files. Every argument has hard bounds validated with zod.',
+        'Tools annotated as read-only, with output schemas and structured content. Errors are returned in a way the model can recover from ("Did you mean guides/setup.md?").',
+        '30 tests, including an end-to-end one that spawns the real CLI over stdio. The tests themselves caught two bugs of mine (a file loaded twice via a symlink, and an ordering that depended on the system locale).',
+        'Demo with a local 3B model: it gets 1 of 3 questions right and the README says so, unedited. The server did its part; the mistakes are the model\'s.',
+      ],
+    },
+    tech: ['TypeScript', 'MCP', 'Node.js', 'zod', 'BM25', 'Ollama', 'Security'],
+    links: {
+      github: 'https://github.com/JuanMiguelAbellan/docs-search-mcp',
     },
   },
   {
