@@ -1,0 +1,122 @@
+.ha_hero {
+  position: relative;
+  height: 100vh;
+  min-height: 640px;
+  overflow: hidden;
+}
+
+.ha_canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: crosshair;
+}
+
+.ha_contenido {
+  position: absolute;
+  left: clamp(16px, 3vw, 40px);
+  right: clamp(16px, 3vw, 40px);
+  bottom: clamp(80px, 11vh, 110px);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ha_tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+
+.ha_tag {
+  background: var(--page);
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+}
+
+.ha_tag--accent {
+  background: var(--accent);
+  color: var(--page);
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+}
+
+.ha_titulo {
+  margin: 0;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(76px, 16vw, 300px);
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  text-shadow: 0 0 40px var(--page);
+}
+
+.ha_titulo span {
+  display: block;
+}
+
+.ha_titulo span + span {
+  padding-top: 0.16em;
+}
+
+.ha_fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 40px;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.ha_desc {
+  margin: 0;
+  max-width: 50ch;
+  font-size: clamp(14px, 1.15vw, 16px);
+  line-height: 1.6;
+  background: var(--page);
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  text-wrap: pretty;
+}
+
+.ha_acciones {
+  display: flex;
+  gap: 10px;
+  pointer-events: auto;
+  flex-wrap: wrap;
+}
+
+.ha_cta {
+  padding: 14px 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.ha_cta--primaria {
+  background: var(--accent);
+  color: var(--page);
+  box-shadow: 5px 5px 0 var(--ink);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.ha_cta--primaria:hover {
+  transform: translate(5px, 5px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.ha_cta--secundaria {
+  background: var(--page);
+  border: 1px solid var(--ink);
+  transition: background 0.2s, color 0.2s;
+}
+
+.ha_cta--secundaria:hover {
+  background: var(--ink);
+  color: var(--page);
+}

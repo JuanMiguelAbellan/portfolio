@@ -1,0 +1,42 @@
+.ha_nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px clamp(16px, 3vw, 40px);
+  font-size: 12px;
+  text-transform: uppercase;
+  background: var(--page);
+  border-bottom: 1px solid var(--line);
+}
+
+.ha_logo {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.ha_enlaces {
+  display: flex;
+  gap: clamp(10px, 2vw, 24px);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.ha_enlaces a { transition: color 0.2s ease; }
+.ha_enlaces a:hover { color: var(--accent); }
+
+.ha_idioma {
+  background: var(--accent);
+  color: var(--page);
+  border: none;
+  font: inherit;
+  font-weight: 700;
+  padding: 5px 9px;
+  cursor: pointer;
+}
