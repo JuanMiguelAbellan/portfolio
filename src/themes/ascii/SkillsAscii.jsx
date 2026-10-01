@@ -20,7 +20,7 @@ function Grupo({ g, lang }) {
 export default function SkillsAscii() {
   const { t, lang } = useLanguage()
   const tituloRef = useRef(null)
-  useScramble(tituloRef, { modo: 'vista', duracion: 900, lang })
+  useScramble(tituloRef, { modo: 'vista', duracion: 650, lang })
 
   return (
     <section id="skills" className="ska_seccion">

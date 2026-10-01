@@ -10,6 +10,11 @@
   line-height: 0.9;
   letter-spacing: -0.04em;
   font-variation-settings: 'wght' 700, 'wdth' 80;
+  /* Color fijo, no heredado: esta sección vive en el tono "ink" y el
+     texto de <body> tarda 0.6s en virar de color al cruzar la sección
+     anterior — heredarlo dejaba el título ilegible a mitad de ese
+     cruce. */
+  color: var(--page);
 }
 
 .hkp_lista {
@@ -22,7 +27,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 16px 40px;
-  align-items: baseline;
+  align-items: start;
   padding: 36px 16px;
   border-top: 1px solid currentColor;
   border-bottom: 1px solid currentColor;

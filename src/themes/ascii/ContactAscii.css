@@ -89,10 +89,3 @@
   background: var(--ink);
   color: var(--page);
 }
-
-.ca_footer {
-  font-size: 11px;
-  color: var(--muted);
-  border-top: 1px dashed var(--line);
-  padding-top: 14px;
-}

@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react'
 import { SCRAMBLE_GLYPHS } from '../theme/tokens'
 
 // Construye texto carácter a carácter con una cola de glifos sueltos
-// por delante (párrafo "Sobre mí" de ASCII). 2600ms la primera vez que
-// entra en el viewport, 900ms en las siguientes (cambio de idioma).
+// por delante (párrafo "Sobre mí" de ASCII). 1500ms la primera vez que
+// entra en el viewport, 600ms en las siguientes (cambio de idioma).
 export function useDecodeText(ref, texto) {
   const reveladoRef = useRef(false)
 
@@ -34,14 +34,14 @@ export function useDecodeText(ref, texto) {
     }
 
     if (reveladoRef.current) {
-      decodificar(900)
+      decodificar(600)
       return
     }
     const io = new IntersectionObserver(([entrada]) => {
       if (!entrada.isIntersecting) return
       io.disconnect()
       reveladoRef.current = true
-      decodificar(2600)
+      decodificar(1500)
     }, { threshold: 0.12 })
     io.observe(el)
     return () => io.disconnect()

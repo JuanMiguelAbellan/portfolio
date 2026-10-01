@@ -33,14 +33,11 @@ export const translations = {
     },
     contact: {
       title: 'Contacto',
-      body: 'Si tienes una oportunidad de teletrabajo o simplemente quieres comentar algún proyecto, escríbeme.',
+      body: "LET'S BUILD SOMETHING INTERESTING. No busco hacer otra web más. Busco crear algo que merezca la pena recordar.",
       email: 'Escribir un email',
     },
     theme: {
       switcherLabel: 'Estilo',
-    },
-    footer: {
-      built: 'Diseñada y construida por Juan Miguel Abellán',
     },
   },
   en: {
@@ -77,14 +74,11 @@ export const translations = {
     },
     contact: {
       title: 'Contact',
-      body: 'If you have a remote opportunity or just want to talk about a project, reach out.',
+      body: "LET'S BUILD SOMETHING INTERESTING. I'm not looking to build just another website. I'm looking to create something worth remembering.",
       email: 'Send an email',
     },
     theme: {
       switcherLabel: 'Style',
-    },
-    footer: {
-      built: 'Designed and built by Juan Miguel Abellán',
     },
   },
 }
