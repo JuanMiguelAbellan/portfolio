@@ -38,7 +38,6 @@ export default function ContactLatente() {
             </div>
           </div>
         </div>
-        <footer className="ctl_footer mono">{t.footer.built} · {new Date().getFullYear()}</footer>
       </div>
     </section>
   )

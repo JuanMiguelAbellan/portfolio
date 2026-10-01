@@ -101,9 +101,3 @@
 }
 
 .ctp_boton--borde:hover { background: var(--ink); color: var(--page); }
-
-.ctp_footer {
-  padding: 0 clamp(20px, 4vw, 56px);
-  font-family: var(--font-mono);
-  font-size: 11px;
-}

@@ -40,8 +40,8 @@ export function useAsciiField(canvasRef) {
       const inside = s.mouseIn && s.my > r.top && s.my < r.bottom
       const tx = inside ? s.mx - r.left : aw * (0.62 + 0.2 * Math.sin(t * 0.0004))
       const ty = inside ? s.my - r.top : ah * (0.35 + 0.15 * Math.cos(t * 0.0005))
-      s.lx = (s.lx ?? tx) + (tx - (s.lx ?? tx)) * 0.1
-      s.ly = (s.ly ?? ty) + (ty - (s.ly ?? ty)) * 0.1
+      s.lx = (s.lx ?? tx) + (tx - (s.lx ?? tx)) * 0.18
+      s.ly = (s.ly ?? ty) + (ty - (s.ly ?? ty)) * 0.18
       s.ripples = s.ripples.filter(rp => t - rp.t < 2200)
 
       ctx.fillStyle = PAGE

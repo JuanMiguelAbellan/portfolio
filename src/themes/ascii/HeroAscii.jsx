@@ -10,7 +10,7 @@ export default function HeroAscii() {
   const tituloRef = useRef(null)
 
   useAsciiField(canvasRef)
-  useScramble(tituloRef, { modo: 'montaje', duracion: 1400, lang })
+  useScramble(tituloRef, { modo: 'montaje', duracion: 900, lang })
 
   return (
     <section id="top" className="ha_hero">

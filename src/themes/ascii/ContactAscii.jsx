@@ -13,7 +13,7 @@ export default function ContactAscii() {
   const tituloRef = useRef(null)
 
   useBigTitleScroll(seccionRef, tituloRef)
-  useScramble(tituloRef, { modo: 'vista', duracion: 900, lang })
+  useScramble(tituloRef, { modo: 'vista', duracion: 650, lang })
 
   function abrirEmail() {
     window.location.href = `mailto:${CORREO_USUARIO}@${CORREO_DOMINIO}`
@@ -37,7 +37,6 @@ export default function ContactAscii() {
           </a>
         </div>
       </div>
-      <footer className="ca_footer mono">{t.footer.built} · {new Date().getFullYear()}</footer>
     </section>
   )
 }

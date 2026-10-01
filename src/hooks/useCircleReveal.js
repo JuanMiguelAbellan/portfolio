@@ -15,10 +15,14 @@ export function useCircleReveal(sectionRef, panelRef) {
 
     panel.style.clipPath = 'circle(0% at 50% 100%)'
 
+    // Retraso antes de que empiece a crecer: sin esto arrancaba en
+    // cuanto el borde superior de la sección asomaba por abajo.
+    const RETRASO = 0.35
+
     function calcular() {
       const r = seccion.getBoundingClientRect()
       const vh = window.innerHeight
-      const p = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.85)))
+      const p = Math.min(1, Math.max(0, (vh * (1 - RETRASO) - r.top) / (vh * 0.85)))
       panel.style.clipPath = p >= 1 ? 'none' : `circle(${(1 - Math.pow(1 - p, 3)) * 150}% at 50% 100%)`
     }
 

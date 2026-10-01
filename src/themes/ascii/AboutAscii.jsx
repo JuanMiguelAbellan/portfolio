@@ -15,7 +15,7 @@ export default function AboutAscii() {
   const [segundoRef, segundoVisible] = useScrollReveal()
 
   useAboutPanelScroll(seccionRef, panelRef)
-  useScramble(h2Ref, { modo: 'vista', duracion: 900, lang })
+  useScramble(h2Ref, { modo: 'vista', duracion: 650, lang })
   useDecodeText(textoRef, t.about.body[0])
 
   return (

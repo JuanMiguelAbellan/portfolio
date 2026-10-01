@@ -22,7 +22,7 @@ function Item({ h, lang }) {
 export default function HackathonsAscii() {
   const { t, lang } = useLanguage()
   const tituloRef = useRef(null)
-  useScramble(tituloRef, { modo: 'vista', duracion: 900, lang })
+  useScramble(tituloRef, { modo: 'vista', duracion: 650, lang })
 
   return (
     <section id="hackathons" className="hka_seccion">

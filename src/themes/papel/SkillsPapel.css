@@ -10,6 +10,7 @@
   line-height: 0.9;
   letter-spacing: -0.04em;
   font-variation-settings: 'wght' 700, 'wdth' 80;
+  color: var(--page);
 }
 
 .sp_lista {

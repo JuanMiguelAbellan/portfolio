@@ -75,7 +75,7 @@ export default function ProjectsAscii() {
   const tituloRef = useRef(null)
   const punteroFino = usePointerFino()
 
-  useScramble(tituloRef, { modo: 'vista', duracion: 900, lang })
+  useScramble(tituloRef, { modo: 'vista', duracion: 650, lang })
 
   const ordenados = proyectosOrdenados(projects)
   const derivados = ordenados.map((p, i) => derivarProyecto(p, i, lang, t))

@@ -79,9 +79,3 @@
 }
 
 .ctl_boton--borde:hover { background: var(--page); color: var(--accent); }
-
-.ctl_footer {
-  font-size: 11px;
-  border-top: 1px solid var(--page);
-  padding-top: 16px;
-}

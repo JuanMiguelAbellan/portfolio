@@ -75,7 +75,6 @@ export default function ContactPapel() {
           </div>
         </div>
       </div>
-      <footer className="ctp_footer">{t.footer.built} · {new Date().getFullYear()}</footer>
     </section>
   )
 }
