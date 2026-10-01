@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(11, 13, 18, 0.8);
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
@@ -35,17 +35,37 @@
   color: var(--text-heading);
 }
 
-.cabecera_idioma {
+.cabecera_acciones {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.cabecera_idioma,
+.cabecera_tema {
   background: transparent;
   border: 1px solid var(--border);
   color: var(--text-muted);
   border-radius: 6px;
-  padding: 0.3rem 0.6rem;
-  font-size: 0.8rem;
   cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
 }
 
-.cabecera_idioma:hover {
+.cabecera_idioma {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+.cabecera_tema {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+}
+
+.cabecera_idioma:hover,
+.cabecera_tema:hover {
   border-color: var(--accent);
   color: var(--accent);
 }

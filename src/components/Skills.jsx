@@ -1,13 +1,15 @@
 import { useLanguage } from '../i18n/LanguageContext'
+import { useReveal } from '../hooks/useReveal'
 import { skillGroups } from '../data/skills'
 import './Skills.css'
 
 export default function Skills() {
   const { lang, t } = useLanguage()
+  const [ref, visible] = useReveal()
 
   return (
     <section id="skills">
-      <div className="contenedor">
+      <div className={`contenedor reveal ${visible ? 'reveal--visible' : ''}`} ref={ref}>
         <p className="etiqueta_seccion mono">04</p>
         <h2 className="titulo_seccion">{t.skills.title}</h2>
         <div className="skills_grid">

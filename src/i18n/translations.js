@@ -36,12 +36,9 @@ export const translations = {
       title: 'Skills',
     },
     contact: {
-      title: 'Hablemos',
+      title: 'Contacto',
       body: 'Si tienes una oportunidad de teletrabajo o simplemente quieres comentar algún proyecto, escríbeme.',
       email: 'Escribir un email',
-    },
-    footer: {
-      built: 'Diseñada y construida por Juan Miguel Abellán',
     },
   },
   en: {
@@ -81,12 +78,9 @@ export const translations = {
       title: 'Skills',
     },
     contact: {
-      title: "Let's talk",
+      title: 'Contact',
       body: 'If you have a remote opportunity or just want to talk about a project, reach out.',
       email: 'Send an email',
-    },
-    footer: {
-      built: 'Designed and built by Juan Miguel Abellán',
     },
   },
 }

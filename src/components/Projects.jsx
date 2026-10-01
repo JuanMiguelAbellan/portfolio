@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
+import { useReveal } from '../hooks/useReveal'
 import { projects } from '../data/projects'
 import ProjectsSlider from './ProjectsSlider'
 import ProjectModal from './ProjectModal'
@@ -11,6 +12,7 @@ export default function Projects() {
   const { t } = useLanguage()
   const [proyectoActivo, setProyectoActivo] = useState(null)
   const triggerRef = useRef(null)
+  const [ref, visible] = useReveal()
 
   function abrirProyecto(project, nodoOrigen) {
     triggerRef.current = nodoOrigen
@@ -23,7 +25,7 @@ export default function Projects() {
 
   return (
     <section id="proyectos">
-      <div className="contenedor">
+      <div className={`contenedor reveal ${visible ? 'reveal--visible' : ''}`} ref={ref}>
         <p className="etiqueta_seccion mono">02</p>
         <h2 className="titulo_seccion">{t.projects.title}</h2>
       </div>

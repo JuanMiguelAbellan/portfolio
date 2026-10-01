@@ -1,0 +1,35 @@
+.stats {
+  padding: 0 1.5rem 4rem;
+}
+
+.stats_grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.stat_item {
+  text-align: center;
+}
+
+.stat_numero {
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.stat_etiqueta {
+  margin-top: 0.3rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 640px) {
+  .stats_grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem 1rem;
+  }
+}

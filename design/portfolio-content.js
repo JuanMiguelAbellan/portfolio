@@ -1,0 +1,443 @@
+(function(){
+const previewReciclab2b = 'assets/reciclab2b.webp'
+const previewIadocuments = 'assets/iadocuments.webp'
+const previewReactAgentLoop = 'assets/react-agent-loop.webp'
+const previewAgentCli = 'assets/agent-cli.webp'
+const previewAutoencoders = 'assets/autoencoders.webp'
+const previewRagEval = 'assets/rag-eval.webp'
+const previewReservas = 'assets/reservas.webp'
+const previewTablero = 'assets/tablero.webp'
+const previewDocsSearchMcp = 'assets/docs-search-mcp.webp'
+
+window.PF_PROJECTS = [
+  {
+    id: 'reciclab2b',
+    featured: false,
+    title: 'ReciclaB2B',
+    preview: previewReciclab2b,
+    summary: {
+      es: 'Mercado B2B de material reciclable con mensajería en tiempo real y control de inventario.',
+      en: 'B2B recyclable-material marketplace with real-time messaging and inventory control.',
+    },
+    description: {
+      es: 'Plataforma B2B para conectar generadores de material reciclable con compradores, distribuidores e industrias: ofertas con control de inventario, mercado con mapa y filtros, mensajería en tiempo real por oferta, y pedidos con ciclo de vida completo.',
+      en: 'B2B platform connecting recyclable-material generators with buyers, distributors and industries: inventory-controlled offers, a marketplace with map and filters, real-time per-offer messaging, and full order lifecycle management.',
+    },
+    highlights: {
+      es: [
+        'Desarrollado por fases con dos auditorías de seguridad propias: encontré y cerré un bug de silent-denial que bloqueaba a cualquier miembro no-principal de una empresa, y una escalada de privilegios real en el panel de administración — ambos con tests que fallaban sin el fix.',
+        'Mensajería en tiempo real por oferta (Laravel Reverb, WebSockets propios) y control de inventario con reintento ante condiciones de carrera al aceptar pedidos.',
+        'Ubicaciones con privacidad: coordenadas exactas solo visibles para el propietario, aproximadas (desplazamiento determinista) en el mercado público.',
+        '151 tests, 476 assertions.',
+        'La demo incluye cuentas de prueba para cada rol (superadmin, admin, productor, comprador) con ofertas, chat y pedidos ya cargados — el propio login muestra las credenciales.',
+      ],
+      en: [
+        'Built in phases with two self-run security audits: found and closed a silent-denial bug blocking any non-primary company member, and a real privilege-escalation path in the admin panel — both with tests that failed without the fix.',
+        'Real-time per-offer messaging (Laravel Reverb, self-hosted WebSockets) and inventory control with race-condition-safe order acceptance.',
+        'Privacy-aware locations: exact coordinates visible only to the owner, deterministically offset ones shown on the public marketplace.',
+        '151 tests, 476 assertions.',
+        'The demo includes test accounts for every role (superadmin, admin, producer, buyer) preloaded with offers, chat and orders — the login page itself shows the credentials.',
+      ],
+    },
+    tech: ['Laravel', 'Inertia.js', 'React', 'TypeScript', 'Filament', 'Laravel Reverb', 'Tailwind'],
+    links: {
+      demo: 'https://web-production-4d6ac.up.railway.app',
+      github: 'https://github.com/JuanMiguelAbellan/reciclab2b',
+    },
+  },
+  {
+    id: 'iadocuments',
+    featured: true,
+    title: 'IADocuments',
+    preview: previewIadocuments,
+    summary: {
+      es: 'Asistente de IA autoalojado para preguntar, anotar y editar tus propios PDFs.',
+      en: 'Self-hosted AI assistant to ask, annotate and edit your own PDFs.',
+    },
+    description: {
+      es: 'Asistente de IA para trabajar con tus propios documentos. Sube un PDF, pregúntale directamente sobre su contenido y edítalo con anotaciones nativas — con un modelo de lenguaje autoalojado, sin depender de una API de terceros.',
+      en: 'AI assistant for working with your own documents. Upload a PDF, ask it directly about its content, and annotate it natively — powered by a self-hosted language model, with no third-party API dependency.',
+    },
+    highlights: {
+      es: [
+        'RAG con embeddings (pgvector + nomic-embed-text): solo se recuperan los fragmentos relevantes del documento en vez de reenviarlo entero en cada mensaje.',
+        'LLM autoalojado en infraestructura propia (Ollama) — control total sobre coste, privacidad y latencia.',
+        'Streaming de la respuesta token a token por WebSocket.',
+        'Edición y anotación nativa de PDF (motor completo de pdf.js).',
+        'Pagos reales en modo test (Stripe: PaymentIntents + webhook) y verificación de email.',
+      ],
+      en: [
+        'RAG with embeddings (pgvector + nomic-embed-text): only the relevant document fragments are retrieved instead of resending the whole document on every message.',
+        'Self-hosted LLM on its own infrastructure (Ollama) — full control over cost, privacy and latency.',
+        'Token-by-token response streaming over WebSocket.',
+        'Native PDF editing and annotation (full pdf.js engine).',
+        'Real test-mode payments (Stripe: PaymentIntents + webhook) and email verification.',
+      ],
+    },
+    tech: ['React', 'Node.js', 'Express', 'TypeScript', 'PostgreSQL', 'pgvector', 'Ollama', 'WebSockets', 'Stripe', 'Docker'],
+    links: {
+      demo: 'https://iadocuments-jmabellan.vercel.app',
+      github: 'https://github.com/JuanMiguelAbellan/Proyecto-2-DAW',
+    },
+  },
+  {
+    id: 'reservas',
+    featured: false,
+    title: 'Reservas',
+    preview: previewReservas,
+    summary: {
+      es: 'Reservas multi-negocio donde el doble booking es imposible: lo garantiza PostgreSQL, no el código.',
+      en: 'Multi-business booking system where double booking is impossible: PostgreSQL guarantees it, not the code.',
+    },
+    description: {
+      es: 'Sistema de reservas para varios negocios: cada uno tiene su página pública, servicios, horarios y recursos (personas, pistas, salas). Los clientes reservan sin cuenta y los propietarios gestionan todo desde un panel. Me centré en lo difícil: que sea correcto bajo concurrencia, con zonas horarias y con separación estricta entre negocios.',
+      en: 'Booking system for multiple businesses: each has its own public page, services, opening hours and resources (people, courts, rooms). Customers book without an account and owners manage everything from a dashboard. I focused on the hard part: being correct under concurrency, across time zones, and with strict separation between businesses.',
+    },
+    highlights: {
+      es: [
+        'El doble booking es imposible por diseño: una restricción de exclusión de PostgreSQL sobre rangos de tiempo impide dos reservas solapadas del mismo recurso, haga lo que haga la aplicación. Los tests lanzan 20 peticiones simultáneas al mismo hueco: con un recurso gana exactamente 1, con tres ganan exactamente 3.',
+        'Bug encontrado midiendo: con la restricción sola, 19 de 20 peticiones simultáneas morían con un deadlock (40P01) y el test tardaba ~19 s. Un bloqueo de fila sobre el recurso hace que el perdedor reciba el error limpio al instante (~0,1 s).',
+        'Horarios en la zona horaria del negocio y correctos en los cambios de hora (días de 23 y 25 horas), probados en Madrid, zonas con media hora de desfase y el cambio de fecha. Un test E2E carga la página desde un navegador configurado en Tokio y comprueba que sigue viendo las 08:00 de Canarias.',
+        'Multi-tenencia: el negocio siempre sale de la sesión, nunca de la URL ni del formulario; hay tests que intentan tocar datos de otro negocio. Contraseñas con scrypt, sesiones guardadas como hash, bloqueo tras 10 intentos fallidos, sin enumeración de cuentas.',
+        'Recordatorios que no se envían dos veces aunque corran varios procesos a la vez (UPDATE … FOR UPDATE SKIP LOCKED).',
+        '43 tests contra PostgreSQL real más 13 tests E2E con Playwright, cada ejecución sobre una base de datos nueva; CI en GitHub Actions. Los E2E eran intermitentes hasta que descubrí que compartían estado con ejecuciones anteriores.',
+      ],
+      en: [
+        'Double booking is impossible by design: a PostgreSQL exclusion constraint over time ranges refuses two overlapping bookings of the same resource, whatever the application does. Tests fire 20 simultaneous requests at one slot: with one resource exactly 1 wins, with three exactly 3 win.',
+        'A bug found by measuring: with the constraint alone, 19 of 20 simultaneous requests died with a deadlock (40P01) and the test took ~19 s. A row lock on the resource makes the loser get the clean error instantly (~0.1 s).',
+        'Opening hours live in the business time zone and stay correct on daylight-saving changes (23- and 25-hour days), tested on Madrid, half-hour-offset zones and across the date line. An E2E test loads the page from a Tokyo-configured browser and checks it still shows the Canary Islands business\' 08:00.',
+        'Multi-tenancy: the business always comes from the session, never from the URL or a form; tests try to touch another business\' data. scrypt passwords, hashed sessions, lockout after 10 failed logins, no account enumeration.',
+        'Reminders that are never sent twice even with several workers at once (UPDATE … FOR UPDATE SKIP LOCKED).',
+        '43 tests against real PostgreSQL plus 13 Playwright E2E tests, each run on a fresh database; CI on GitHub Actions. The E2E suite was flaky until I found it shared state with earlier runs.',
+      ],
+    },
+    tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Playwright', 'Docker', 'GitHub Actions', 'Railway'],
+    links: {
+      demo: 'https://web-production-acd80.up.railway.app',
+      github: 'https://github.com/JuanMiguelAbellan/reservas',
+    },
+  },
+  {
+    id: 'tablero',
+    featured: false,
+    title: 'Tablero',
+    preview: previewTablero,
+    summary: {
+      es: 'Kanban colaborativo: varias personas editan a la vez, ven los cambios en vivo y trabajan aunque se caiga la red.',
+      en: 'Collaborative Kanban: several people edit at once, see changes live, and keep working when the network drops.',
+    },
+    description: {
+      es: 'Tablero Kanban en tiempo real. Se arrastran tarjetas con el ratón o con el teclado, se comparten tableros con enlaces de invitación (editor o solo lectura) y todo se sincroniza entre personas al instante. Me centré en qué pasa cuando editan varias personas a la vez y la red falla.',
+      en: 'Real-time Kanban board. Cards are dragged with the mouse or the keyboard, boards are shared through invite links (editor or read-only) and everything syncs between people instantly. I focused on what happens when several people edit at once and the network fails.',
+    },
+    highlights: {
+      es: [
+        'Tiempo real con Server-Sent Events sobre un registro de cambios: cada cambio se guarda en la misma transacción que los datos, y un cliente que se reconecta pide «todo lo posterior al evento N», sin huecos ni repetidos. PostgreSQL LISTEN/NOTIFY solo avisa; la entrega se guía por la tabla, así que una notificación perdida solo retrasa, nunca pierde. Un test mata la conexión de escucha a mitad de flujo y comprueba que se recupera.',
+        'Interfaz optimista con reconciliación (reductor puro con sus tests): el cambio se ve al instante, se descarta cuando llegan los eventos reales y, si el servidor lo rechaza, la pantalla vuelve a la verdad. Si falla la red se reintenta con el mismo id de operación, que el servidor trata de forma idempotente: nunca se aplica dos veces (test E2E con las peticiones bloqueadas).',
+        'Ordenar sin renumerar: índices fraccionarios, así mover una tarjeta escribe una sola fila. Descubrí que la colación por defecto de PostgreSQL reordenaría las claves en silencio; se corrigió con COLLATE "C" y un test que compara el orden de la base de datos con el de JavaScript.',
+        'Arrastrar y soltar también con teclado, cubierto por un test E2E. Diálogos nativos <dialog> y regiones aria-live.',
+        'Seguridad: defensa CSRF con cabecera propia, membresía comprobada en la misma transacción que el cambio, 404 idéntico para tableros ajenos e inexistentes, invitaciones que caducan y se guardan con hash.',
+        '52 tests contra PostgreSQL real (incluidas 40 escrituras simultáneas en el mismo punto) y 9 tests E2E: dos personas que convergen, modo lectura y trabajo sin conexión. El CI falló una vez solo en GitHub: dnd-kit ignora los clics durante 50 ms tras soltar y la máquina rápida hacía clic dentro de esa ventana.',
+      ],
+      en: [
+        'Real time with Server-Sent Events over a change log: each change is stored in the same transaction as the data, and a reconnecting client asks for "everything after event N", with no gaps and no repeats. PostgreSQL LISTEN/NOTIFY only wakes the server; delivery is driven by the table, so a lost notification can only delay, never lose. A test kills the listening connection mid-stream and checks it recovers.',
+        'Optimistic UI with reconciliation (a pure reducer with its own tests): the change shows instantly, is dropped when the real events arrive, and if the server rejects it the screen falls back to the truth. On network failure it is retried with the same operation id, which the server handles idempotently: never applied twice (E2E test with requests blocked).',
+        'Ordering without renumbering: fractional indexing, so moving a card writes one row. I found that PostgreSQL\'s default collation would silently reorder the keys; fixed with COLLATE "C" and a test comparing the database order with JavaScript\'s.',
+        'Drag and drop also works from the keyboard, covered by an E2E test. Native <dialog>s and aria-live regions.',
+        'Security: CSRF defence with a custom header, membership checked in the same transaction as the change, identical 404 for other people\'s boards and non-existent ones, invites that expire and are stored hashed.',
+        '52 tests against real PostgreSQL (including 40 simultaneous writes at the same spot) and 9 E2E tests: two people converging, read-only mode and working offline. CI failed once, only on GitHub: dnd-kit ignores clicks for 50 ms after a drop and the faster machine clicked inside that window.',
+      ],
+    },
+    tech: ['React', 'Fastify', 'TypeScript', 'PostgreSQL', 'Server-Sent Events', 'Playwright', 'Docker', 'Railway'],
+    links: {
+      demo: 'https://web-production-1e9f.up.railway.app',
+      github: 'https://github.com/JuanMiguelAbellan/tablero',
+    },
+  },
+  {
+    id: 'rag-eval',
+    featured: false,
+    title: 'rag-eval',
+    preview: previewRagEval,
+    summary: {
+      es: 'Mide con estadística real cuánto acierta un RAG. Aplicado a IADocuments: MRR de 0.685 a 0.947.',
+      en: 'Measures how good a RAG pipeline really is, with real statistics. Applied to IADocuments: MRR 0.685 → 0.947.',
+    },
+    description: {
+      es: 'Banco de pruebas para pipelines RAG: puntúa la recuperación y la calidad de las respuestas sobre un conjunto de preguntas verificado a mano, con cualquier estrategia de troceado y cualquier buscador, con intervalos de confianza y en local (Ollama, sin claves de API). Lo construí para responder una pregunta concreta sobre mi propio proyecto: ¿eran buenos los ajustes de IADocuments?',
+      en: 'Test bench for RAG pipelines: scores retrieval and answer quality on a hand-checked question set, over any chunking strategy and any retriever, with confidence intervals, running locally (Ollama, no API keys). I built it to answer one concrete question about my own project: were IADocuments\' settings any good?',
+    },
+    highlights: {
+      es: [
+        'Hallazgo real: el punto débil de IADocuments era el modelo de embeddings, no el troceado. nomic-embed-text (centrado en inglés) perdía en español contra BM25, que no usa ningún modelo (0.685 vs 0.885 de MRR).',
+        'Mejor configuración medida (troceado por párrafos + BM25 + bge-m3 fusionados con RRF): MRR 0.947 y 98.6 % de recall@5, y las respuestas correctas de qwen2.5:3b suben del 81.8 % al 91.8 % (IC 95 % pareado de la mejora: +2.7 a +19.1 puntos).',
+        'Las etiquetas son citas literales, no ids de fragmento, así que se pueden comparar estrategias de troceado distintas de forma justa. Sin LLM como juez: puntuación determinista por hechos clave y abstención explícita.',
+        'Cada diferencia lleva un bootstrap pareado (2000 remuestreos, semilla fija): «mejor» significa que el intervalo excluye el cero.',
+        'Corregí mis propias conclusiones con los datos (el troceado por párrafos no gana siempre) y documenté las limitaciones: un solo anotador, sesgo léxico, un dominio.',
+        '43 tests sin necesidad de Ollama (un servidor HTTP falso lo sustituye).',
+      ],
+      en: [
+        'Real finding: IADocuments\' weak spot was the embedding model, not the chunking. nomic-embed-text (English-centric) lost on Spanish to BM25, which uses no model at all (0.685 vs 0.885 MRR).',
+        'Best measured setup (paragraph chunks + BM25 + bge-m3 fused with RRF): MRR 0.947 and 98.6% recall@5, and qwen2.5:3b\'s correct answers rise from 81.8% to 91.8% (paired 95% CI of the gain: +2.7 to +19.1 points).',
+        'Labels are verbatim quotes, not chunk ids, so different chunking strategies can be compared fairly. No LLM-as-judge: deterministic scoring by key facts and explicit abstention.',
+        'Every difference gets a paired bootstrap (2000 resamples, fixed seed): "better" means the interval excludes zero.',
+        'Corrected my own conclusions against the data (paragraph chunking does not always win) and documented the limits: single annotator, lexical bias, one domain.',
+        '43 tests that need no Ollama (a fake HTTP server stands in).',
+      ],
+    },
+    tech: ['TypeScript', 'Node.js', 'Ollama', 'RAG', 'BM25', 'Embeddings', 'Statistics'],
+    links: {
+      github: 'https://github.com/JuanMiguelAbellan/rag-eval',
+    },
+  },
+  {
+    id: 'docs-search-mcp',
+    featured: false,
+    title: 'docs-search-mcp',
+    preview: previewDocsSearchMcp,
+    summary: {
+      es: 'Servidor MCP de solo lectura para que una IA busque en tus documentos, diseñado desconfiando del propio modelo.',
+      en: 'Read-only MCP server that lets an AI search your documents, designed to distrust the calling model.',
+    },
+    description: {
+      es: 'Servidor MCP (Model Context Protocol) que da a un cliente de IA (Claude Desktop, Claude Code o tu propio agente) tres herramientas para buscar y leer una carpeta de documentos Markdown/texto, con búsqueda híbrida BM25 + embeddings locales. Lo que más cuidé: los argumentos los escribe un LLM y puede haber sido manipulado, así que se tratan como no fiables.',
+      en: 'MCP (Model Context Protocol) server that gives an AI client (Claude Desktop, Claude Code or your own agent) three tools to search and read a folder of Markdown/text documents, with hybrid BM25 + local-embedding search. What I focused on: arguments are written by an LLM that may have been manipulated, so they are treated as untrusted.',
+    },
+    highlights: {
+      es: [
+        'Ningún argumento se usa nunca como ruta de fichero: los documentos se buscan por id en memoria, así que un id como «../../etc/passwd» es simplemente desconocido (probado con rutas relativas, absolutas, de Windows, bytes NUL y URIs con traversal codificado).',
+        'La carpeta servida es un límite de seguridad: los symlinks que salen de ella se ignoran, además de ficheros binarios, enormes o en exceso. Todos los argumentos tienen límites duros validados con zod.',
+        'Herramientas marcadas como solo lectura, con esquema de salida y contenido estructurado. Los errores se devuelven de forma que el modelo pueda corregirse («¿Quisiste decir guides/setup.md?»).',
+        '30 tests, incluido uno de extremo a extremo que lanza el CLI real por stdio. Los propios tests encontraron dos bugs míos (un fichero cargado dos veces vía symlink y un orden que dependía del idioma del sistema).',
+        'Demo con un modelo local de 3B: acierta 1 de 3 preguntas y el README lo cuenta tal cual, sin retocar. El servidor hizo bien su parte; los fallos son del modelo.',
+      ],
+      en: [
+        'No argument is ever used as a file path: documents are looked up by id in memory, so an id like "../../etc/passwd" is simply unknown (tested with relative, absolute, Windows, NUL-byte and percent-encoded traversal URIs).',
+        'The served folder is a security boundary: symlinks that resolve outside it are skipped, as are binary, oversized or excess files. Every argument has hard bounds validated with zod.',
+        'Tools annotated as read-only, with output schemas and structured content. Errors are returned in a way the model can recover from ("Did you mean guides/setup.md?").',
+        '30 tests, including an end-to-end one that spawns the real CLI over stdio. The tests themselves caught two bugs of mine (a file loaded twice via a symlink, and an ordering that depended on the system locale).',
+        'Demo with a local 3B model: it gets 1 of 3 questions right and the README says so, unedited. The server did its part; the mistakes are the model\'s.',
+      ],
+    },
+    tech: ['TypeScript', 'MCP', 'Node.js', 'zod', 'BM25', 'Ollama', 'Security'],
+    links: {
+      github: 'https://github.com/JuanMiguelAbellan/docs-search-mcp',
+    },
+  },
+  {
+    id: 'react-agent-loop',
+    featured: false,
+    title: 'react-agent-loop',
+    preview: previewReactAgentLoop,
+    summary: {
+      es: 'Paquete npm sin dependencias: bucle de agente ReAct para cualquier cliente de chat.',
+      en: 'Dependency-free npm package: a ReAct agent loop for any chat client.',
+    },
+    description: {
+      es: 'Paquete open source publicado en npm: un bucle de agente con patrón ReAct, sin dependencias, para cualquier cliente de chat. Lo extraje de agent-cli al darme cuenta de que el bucle no tenía nada específico de mi CLI — así que ahora agent-cli depende de este paquete, no al revés.',
+      en: 'Open source package published on npm: a dependency-free ReAct-pattern agent loop for any chat client. Extracted out of agent-cli once I realized the loop itself had nothing CLI-specific about it — agent-cli now depends on this package, not the other way around.',
+    },
+    highlights: {
+      es: [
+        'Funciona con cualquier proveedor: solo necesita un cliente con chat(mensajes) => Promise<string>, no está atado a Ollama.',
+        'Nace de un bug real: el tools nativo de Ollama se colgaba con el modelo usado — este paquete implementa function calling sin depender de que el proveedor lo soporte bien.',
+        '14 tests, cero dependencias de producción.',
+      ],
+      en: [
+        'Works with any provider: only needs a client with chat(messages) => Promise<string>, not tied to Ollama.',
+        'Born from a real bug: Ollama\'s native tools parameter hung with the model in use — this package implements function calling without depending on the provider supporting it correctly.',
+        '14 tests, zero production dependencies.',
+      ],
+    },
+    tech: ['TypeScript', 'npm', 'Jest'],
+    links: {
+      demo: 'https://www.npmjs.com/package/react-agent-loop',
+      github: 'https://github.com/JuanMiguelAbellan/react-agent-loop',
+    },
+  },
+  {
+    id: 'agent-cli',
+    featured: false,
+    title: 'agent-cli',
+    preview: previewAgentCli,
+    summary: {
+      es: 'Agente de terminal con uso real de herramientas sobre un LLM autoalojado.',
+      en: 'Terminal agent with real tool use over a self-hosted LLM.',
+    },
+    description: {
+      es: 'Agente de línea de comandos con uso de herramientas reales (tiempo, GitHub, ficheros, cálculo) sobre un LLM autoalojado, construido sobre react-agent-loop.',
+      en: 'Command-line agent with real tool use (weather, GitHub, files, calculator) over a self-hosted LLM, built on top of react-agent-loop.',
+    },
+    highlights: {
+      es: [
+        '5 herramientas sin coste ni claves; lectura de ficheros y listado de directorio con sandboxing real contra path traversal.',
+        'Validado en real contra el Ollama de producción de IADocuments, encadenando dos herramientas con datos reales.',
+      ],
+      en: [
+        '5 free, keyless tools; file reading and directory listing with real path-traversal sandboxing.',
+        'Validated live against IADocuments\' production Ollama instance, chaining two tools with real data.',
+      ],
+    },
+    tech: ['TypeScript', 'Node.js', 'react-agent-loop'],
+    links: {
+      github: 'https://github.com/JuanMiguelAbellan/agent-cli',
+    },
+  },
+  {
+    id: 'autoencoders',
+    featured: false,
+    title: 'Detección de anomalías con Autoencoders',
+    preview: previewAutoencoders,
+    titleEn: 'Network Anomaly Detection with Autoencoders',
+    summary: {
+      es: 'Autoencoders no supervisados para detectar tráfico de red anómalo, con demo en el navegador.',
+      en: 'Unsupervised autoencoders flagging anomalous network traffic, with an in-browser demo.',
+    },
+    description: {
+      es: 'Sistema de detección de anomalías en tráfico de red mediante autoencoders y variational autoencoders, entrenados de forma no supervisada para detectar comportamiento de proceso anómalo por error de reconstrucción. Desarrollado durante mis prácticas de grado en un contexto real de ciberseguridad.',
+      en: 'Network traffic anomaly detection system using autoencoders and variational autoencoders, trained unsupervised to flag anomalous process behavior via reconstruction error. Built during my degree internship in a real cybersecurity context.',
+    },
+    highlights: {
+      es: [
+        'Feature engineering temporal por ventana deslizante (frecuencia, entropía de dominios, tiempo desde última aparición...).',
+        'Comparativa sistemática de arquitecturas, funciones de pérdida y umbrales vía un orquestador de experimentos propio.',
+        'VAE con pérdida combinada de reconstrucción + divergencia KL.',
+        'Demo pública con datos 100% sintéticos: mismo autoencoder entrenado desde cero, inferencia en el navegador con TensorFlow.js, sin backend.',
+      ],
+      en: [
+        'Sliding-window temporal feature engineering (frequency, domain entropy, time since last seen...).',
+        'Systematic comparison of architectures, loss functions and thresholds via a custom experiment orchestrator.',
+        'VAE with a combined reconstruction + KL-divergence loss.',
+        'Public demo with 100% synthetic data: the same autoencoder trained from scratch, inference running in-browser with TensorFlow.js, no backend.',
+      ],
+    },
+    tech: ['Python', 'TensorFlow/Keras', 'scikit-learn', 'pandas'],
+    // El repo sigue privado (su historial de git aún contiene telemetría real
+    // de las prácticas). Cuando sea público: volver a poner `github` y quitar
+    // `repoPending`.
+    repoPending: true,
+    links: {
+      demo: 'https://anomaly-detection-demo-jmabellan.vercel.app',
+    },
+  },
+]
+
+})();
+window.PF_SKILLS = [
+  { category: { es: 'Frontend', en: 'Frontend' }, items: ['React', 'TypeScript', 'JavaScript', 'HTML/CSS'] },
+  { category: { es: 'Backend', en: 'Backend' }, items: ['Node.js', 'Express', 'Java', 'Spring Boot', 'FastAPI', 'PHP'] },
+  { category: { es: 'Bases de datos', en: 'Databases' }, items: ['PostgreSQL', 'MongoDB', 'pgvector'] },
+  { category: { es: 'IA / ML', en: 'AI / ML' }, items: ['Ollama (LLMs autoalojados)', 'RAG / embeddings', 'TensorFlow', 'Keras', 'scikit-learn'] },
+  { category: { es: 'Infraestructura', en: 'Infrastructure' }, items: ['Docker', 'AWS', 'Railway', 'Vercel', 'CI/CD'] },
+  { category: { es: 'Otros', en: 'Other' }, items: ['WebSockets', 'JWT', 'Stripe', 'Swagger / OpenAPI'] },
+]
+
+window.PF_HACKATHONS = [
+  {
+    id: 'anrgit',
+    title: 'ANRGIT',
+    description: {
+      es: 'Reto de la Hackathon 2026: dashboard interactivo (Chart.js) que cruza los vehículos por etiqueta ambiental con la calidad del aire de Zaragoza.',
+      en: '2026 Hackathon challenge: an interactive dashboard (Chart.js) crossing vehicles by environmental label with Zaragoza air-quality readings.',
+    },
+    links: {
+      github: 'https://github.com/JuanMiguelAbellan/ANRGIT',
+    },
+  },
+]
+
+window.PF_T = {
+  es: {
+    nav: { about: 'Sobre mí', projects: 'Proyectos', hackathons: 'Hackathons', skills: 'Skills', contact: 'Contacto' },
+    hero: {
+      greeting: 'Hola, soy',
+      name: 'Juan Miguel Abellán',
+      tagline: 'Desarrollador full-stack especializado en IA aplicada',
+      description: 'Construyo productos completos — backend, frontend e infraestructura — con la IA integrada de verdad en el producto, no como un añadido.',
+      ctaProjects: 'Ver proyectos',
+      ctaContact: 'Contacto',
+    },
+    about: {
+      title: 'Sobre mí',
+      body: [
+        'Soy desarrollador full-stack recién graduado en Desarrollo de Aplicaciones Web (DAW), con una base amplia — React, Node/Express, TypeScript, PostgreSQL, Docker — y un interés concreto en llevar la IA más allá del "chatbot genérico": modelos autoalojados, RAG con embeddings, y sistemas de detección de anomalías con deep learning.',
+        'Me gusta entender el producto de punta a punta: desde la arquitectura del backend hasta por qué un botón no se ve bien en una paleta de colores concreta. Busco trabajo en remoto, idealmente en equipos donde la IA aplicada sea parte real del producto.',
+      ],
+    },
+    projects: {
+      title: 'Proyectos',
+      featuredLabel: 'Proyecto destacado',
+      demo: 'Ver demo',
+      code: 'Código',
+      comingSoon: 'Repositorio pendiente de publicar',
+      openDetails: 'Ver detalles de',
+      close: 'Cerrar',
+      prev: 'Proyecto anterior',
+      next: 'Proyecto siguiente',
+      pause: 'Pausar el carrusel',
+      resume: 'Reanudar el carrusel',
+    },
+    hackathons: {
+      title: 'Hackathons',
+    },
+    skills: {
+      title: 'Skills',
+    },
+    contact: {
+      title: 'Hablemos',
+      body: 'Si tienes una oportunidad de teletrabajo o simplemente quieres comentar algún proyecto, escríbeme.',
+      email: 'Escribir un email',
+    },
+    footer: {
+      built: 'Diseñada y construida por Juan Miguel Abellán',
+    },
+  },
+  en: {
+    nav: { about: 'About', projects: 'Projects', hackathons: 'Hackathons', skills: 'Skills', contact: 'Contact' },
+    hero: {
+      greeting: "Hi, I'm",
+      name: 'Juan Miguel Abellán',
+      tagline: 'Full-stack developer specializing in applied AI',
+      description: 'I build complete products — backend, frontend and infrastructure — with AI actually integrated into the product, not bolted on as an afterthought.',
+      ctaProjects: 'View projects',
+      ctaContact: 'Contact',
+    },
+    about: {
+      title: 'About me',
+      body: [
+        'I\'m a full-stack developer, recently graduated in Web Application Development (DAW), with a broad base — React, Node/Express, TypeScript, PostgreSQL, Docker — and a specific interest in taking AI beyond the "generic chatbot": self-hosted models, RAG with embeddings, and deep-learning-based anomaly detection.',
+        'I like understanding the whole product, end to end — from the backend architecture down to why a button looks wrong in a specific color palette. I\'m looking for remote work, ideally on teams where applied AI is a real part of the product.',
+      ],
+    },
+    projects: {
+      title: 'Projects',
+      featuredLabel: 'Featured project',
+      demo: 'View demo',
+      code: 'Code',
+      comingSoon: 'Repository not published yet',
+      openDetails: 'View details for',
+      close: 'Close',
+      prev: 'Previous project',
+      next: 'Next project',
+      pause: 'Pause carousel',
+      resume: 'Resume carousel',
+    },
+    hackathons: {
+      title: 'Hackathons',
+    },
+    skills: {
+      title: 'Skills',
+    },
+    contact: {
+      title: "Let's talk",
+      body: 'If you have a remote opportunity or just want to talk about a project, reach out.',
+      email: 'Send an email',
+    },
+    footer: {
+      built: 'Designed and built by Juan Miguel Abellán',
+    },
+  },
+}
+
+window.PF_CONTACT = { email: 'wextren@gmail.com', github: 'https://github.com/JuanMiguelAbellan', linkedin: 'https://www.linkedin.com/in/juan-miguel-abell%C3%A1n-piedrafita-b26a74425/' };
+window.PF_READY = true;
