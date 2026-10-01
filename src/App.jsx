@@ -2,12 +2,12 @@ import { LanguageProvider } from './i18n/LanguageContext'
 import { ThemeProvider } from './theme/ThemeContext'
 import Header from './components/Header'
 import Hero from './components/Hero'
-import Stats from './components/Stats'
 import About from './components/About'
 import Projects from './components/Projects'
 import Hackathons from './components/Hackathons'
 import Skills from './components/Skills'
 import Contact from './components/Contact'
+import ThemeSwitcher from './components/ThemeSwitcher'
 
 function App() {
   return (
@@ -15,12 +15,12 @@ function App() {
       <LanguageProvider>
         <Header />
         <Hero />
-        <Stats />
         <About />
         <Projects />
         <Hackathons />
         <Skills />
         <Contact />
+        <ThemeSwitcher />
       </LanguageProvider>
     </ThemeProvider>
   )

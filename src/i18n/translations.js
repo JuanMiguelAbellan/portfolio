@@ -40,6 +40,9 @@ export const translations = {
       body: 'Si tienes una oportunidad de teletrabajo o simplemente quieres comentar algún proyecto, escríbeme.',
       email: 'Escribir un email',
     },
+    theme: {
+      switcherLabel: 'Estilo',
+    },
   },
   en: {
     nav: { about: 'About', projects: 'Projects', hackathons: 'Hackathons', skills: 'Skills', contact: 'Contact' },
@@ -81,6 +84,9 @@ export const translations = {
       title: 'Contact',
       body: 'If you have a remote opportunity or just want to talk about a project, reach out.',
       email: 'Send an email',
+    },
+    theme: {
+      switcherLabel: 'Style',
     },
   },
 }

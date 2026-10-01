@@ -1,15 +1,16 @@
 import { createContext, useContext, useState, useEffect } from 'react'
+import { THEME_ORDER } from './tokens'
 
 const ThemeContext = createContext(null)
 
 function temaInicial() {
   try {
-    const guardado = localStorage.getItem('tema')
-    if (guardado === 'light' || guardado === 'dark') return guardado
+    const guardado = localStorage.getItem('jma-theme')
+    if (THEME_ORDER.includes(guardado)) return guardado
   } catch {
-    // localStorage no disponible: seguimos con la preferencia del sistema
+    // localStorage no disponible: usamos el tema por defecto
   }
-  return window.matchMedia?.('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+  return 'latente'
 }
 
 export function ThemeProvider({ children }) {
@@ -17,17 +18,15 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     try {
-      localStorage.setItem('tema', theme)
+      localStorage.setItem('jma-theme', theme)
     } catch {
       // per-viewer preference only: si falla, no pasa nada
     }
     document.documentElement.dataset.theme = theme
   }, [theme])
 
-  const toggleTheme = () => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
-
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   )

@@ -1,55 +1,83 @@
-:root {
-  --bg: #0b0d12;
-  --bg-raised: #12151c;
-  --bg-card: #151922;
-  --border: #232834;
-  --text: #c7ccd6;
-  --text-muted: #838b9c;
-  --text-heading: #f3f5f8;
-  --accent: #5eead4;
-  --accent-dim: rgba(94, 234, 212, 0.12);
-  --accent-strong: #2dd4bf;
-
-  --font-heading: 'Space Grotesk', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
-
-  --max-width: 960px;
-
+/* Tokens exactos de design/Portfolio.dc.html (objeto TK). --bg es la
+   superficie elevada (tarjetas, modal, píldora del selector); --page es
+   el fondo de la página — se mantienen separados porque el tema Papel
+   cambia --page por sección sin tocar el resto de la paleta. */
+:root,
+:root[data-theme='latente'] {
+  --bg: #1d1a17;
+  --page: #151311;
+  --ink: #efebe3;
+  --soft: #cfc9be;
+  --accent: #f0a83a;
+  --accent-ink: #151311;
+  --muted: #a29d94;
+  --line: #3a362f;
+  --font: 'Archivo', sans-serif;
+  --font-head: 'Archivo', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius: 0px;
+  --pill: 0px;
+  --overlay: rgba(10, 9, 8, 0.82);
   color-scheme: dark;
-  font-family: var(--font-body);
-  color: var(--text);
-  background: var(--bg);
+}
+
+:root[data-theme='papel'] {
+  --bg: #fbfaf6;
+  --page: #f4f1ea;
+  --ink: #1d1b17;
+  --soft: #4d4941;
+  --accent: #e0482a;
+  --accent-ink: #f4f1ea;
+  --muted: #6b665c;
+  --line: #cfc9bc;
+  --font: 'Bricolage Grotesque', sans-serif;
+  --font-head: 'Bricolage Grotesque', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --radius: 20px;
+  --pill: 999px;
+  --overlay: rgba(29, 27, 23, 0.55);
+  color-scheme: light;
+}
+
+:root[data-theme='ascii'] {
+  --bg: #212a60;
+  --page: #1a2152;
+  --ink: #eef0f7;
+  --soft: #c9cde3;
+  --accent: #cdeb4f;
+  --accent-ink: #1a2152;
+  --muted: #8f96bf;
+  --line: #3a4378;
+  --font: 'Space Mono', monospace;
+  --font-head: 'Big Shoulders Display', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --radius: 0px;
+  --pill: 0px;
+  --overlay: rgba(10, 14, 40, 0.82);
+  color-scheme: dark;
+}
+
+:root {
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--page);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-}
-
-:root[data-theme='light'] {
-  color-scheme: light;
-  --bg: #f7f8fa;
-  --bg-raised: #eef0f3;
-  --bg-card: #ffffff;
-  --border: #e1e4ea;
-  --text: #3c4250;
-  --text-muted: #6b7280;
-  --text-heading: #12151c;
-  --accent: #0f9488;
-  --accent-dim: rgba(15, 148, 136, 0.1);
-  --accent-strong: #0d7d72;
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  background: var(--bg);
-  transition: background-color 0.25s ease, color 0.25s ease;
+  background: var(--page);
+  transition: background-color 0.6s ease, color 0.6s ease;
+  overflow-x: clip;
 }
 
 h1, h2, h3 {
-  font-family: var(--font-heading);
-  color: var(--text-heading);
+  font-family: var(--font-head);
+  color: var(--ink);
   margin: 0;
   line-height: 1.2;
 }
@@ -65,87 +93,9 @@ code, .mono {
   font-family: var(--font-mono);
 }
 
-section {
-  padding: 5rem 1.5rem;
-}
-
 .contenedor {
-  max-width: var(--max-width);
+  max-width: 1180px;
   margin: 0 auto;
-}
-
-.etiqueta_seccion {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--accent);
-  margin-bottom: 0.75rem;
-}
-
-.etiqueta_seccion::before {
-  content: '';
-  width: 1.5rem;
-  height: 1px;
-  background: var(--accent);
-}
-
-.titulo_seccion {
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
-  margin-bottom: 2.5rem;
-}
-
-.boton {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.7rem 1.4rem;
-  border-radius: 8px;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 0.95rem;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
-}
-
-.boton:hover { transform: translateY(-1px); }
-
-.boton_primario {
-  background: var(--accent);
-  color: #06120f;
-}
-
-.boton_primario:hover { background: var(--accent-strong); }
-
-.boton_secundario {
-  background: transparent;
-  border-color: var(--border);
-  color: var(--text-heading);
-}
-
-.boton_secundario:hover { border-color: var(--accent); }
-
-.chip {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: 6px;
-  background: var(--bg-raised);
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  transition: border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
-}
-
-.chip:hover {
-  border-color: var(--accent);
-  color: var(--text-heading);
-  transform: translateY(-1px);
-}
-
-@media (max-width: 640px) {
-  section { padding: 3.5rem 1.25rem; }
 }
 
 .reveal {
