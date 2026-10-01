@@ -1,7 +1,9 @@
+import { useTheme } from '../theme/ThemeContext'
 import HeaderLatente from '../themes/latente/HeaderLatente'
+import HeaderPapel from '../themes/papel/HeaderPapel'
 
-// Elige la variante de cabecera según el tema activo. De momento solo
-// existe Latente; Papel y ASCII llegan en las fases 3 y 4.
 export default function Header() {
+  const { theme } = useTheme()
+  if (theme === 'papel') return <HeaderPapel />
   return <HeaderLatente />
 }
