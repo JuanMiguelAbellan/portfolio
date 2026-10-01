@@ -15,6 +15,7 @@ export function useVariableWeight(nameRef, activo = true) {
     function onMove(e) { mx = e.clientX; my = e.clientY }
 
     function tick() {
+      if (document.hidden) { raf = requestAnimationFrame(tick); return }
       for (const c of chars) {
         const b = c.el.getBoundingClientRect()
         const d = Math.hypot(b.left + b.width / 2 - mx, b.top + b.height / 2 - my)
