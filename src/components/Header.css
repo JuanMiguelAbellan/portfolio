@@ -2,9 +2,9 @@
   position: sticky;
   top: 0;
   z-index: 20;
-  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  background: color-mix(in srgb, var(--page) 80%, transparent);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--line);
 }
 
 .cabecera_interior {
@@ -27,12 +27,12 @@
 
 .cabecera_nav a {
   font-size: 0.92rem;
-  color: var(--text-muted);
+  color: var(--muted);
   transition: color 0.15s ease;
 }
 
 .cabecera_nav a:hover {
-  color: var(--text-heading);
+  color: var(--ink);
 }
 
 .cabecera_acciones {
@@ -41,31 +41,18 @@
   gap: 0.6rem;
 }
 
-.cabecera_idioma,
-.cabecera_tema {
+.cabecera_idioma {
   background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text-muted);
+  border: 1px solid var(--line);
+  color: var(--muted);
   border-radius: 6px;
   cursor: pointer;
   transition: border-color 0.15s ease, color 0.15s ease;
-}
-
-.cabecera_idioma {
   padding: 0.3rem 0.6rem;
   font-size: 0.8rem;
 }
 
-.cabecera_tema {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-}
-
-.cabecera_idioma:hover,
-.cabecera_tema:hover {
+.cabecera_idioma:hover {
   border-color: var(--accent);
   color: var(--accent);
 }
