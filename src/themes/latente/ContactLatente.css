@@ -1,0 +1,87 @@
+.ctl_seccion {
+  position: relative;
+  min-height: 100vh;
+}
+
+.ctl_panel {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  color: var(--accent-ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(80px, 14vh, 140px) clamp(20px, 4vw, 56px) 84px;
+  gap: 48px;
+}
+
+.ctl_medio {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.ctl_titulo {
+  margin: 0;
+  font-size: clamp(60px, 14vw, 250px);
+  line-height: 0.84;
+  font-weight: 900;
+  font-stretch: 125%;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.ctl_fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 48px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.ctl_body {
+  margin: 0;
+  max-width: 40ch;
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.4;
+}
+
+.ctl_acciones {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ctl_boton {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.ctl_boton--email {
+  background: var(--page);
+  color: var(--accent);
+  padding: 16px 22px;
+  transition: color 0.3s;
+}
+
+.ctl_boton--email:hover { color: var(--ink); }
+
+.ctl_boton--borde {
+  border: 1px solid var(--page);
+  padding: 15px 22px;
+  background: transparent;
+  color: inherit;
+  transition: background 0.3s, color 0.3s;
+}
+
+.ctl_boton--borde:hover { background: var(--page); color: var(--accent); }
+
+.ctl_footer {
+  font-size: 11px;
+  border-top: 1px solid var(--page);
+  padding-top: 16px;
+}

@@ -1,0 +1,44 @@
+.hkl_lista {
+  display: flex;
+  flex-direction: column;
+}
+
+.hkl_item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px 40px;
+  padding: 32px 28px;
+  border: 1px solid var(--line);
+  transition: background 0.4s, color 0.4s;
+}
+
+.hkl_item:hover,
+.hkl_item:focus-visible {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.hkl_item + .hkl_item {
+  border-top: none;
+}
+
+.hkl_titulo {
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 800;
+  font-stretch: 125%;
+  letter-spacing: -0.03em;
+}
+
+.hkl_desc {
+  flex: 1 1 320px;
+  max-width: 56ch;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.hkl_link {
+  font-size: 12px;
+  text-transform: uppercase;
+}

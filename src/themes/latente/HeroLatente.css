@@ -1,0 +1,115 @@
+.hl_hero {
+  position: relative;
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 96px clamp(20px, 4vw, 56px) clamp(80px, 10vh, 110px);
+}
+
+.hl_canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hl_contenido {
+  position: relative;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.hl_saludo {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.hl_saludo_nota {
+  color: #5a554e;
+}
+
+.hl_nombre {
+  margin: 0;
+  white-space: nowrap;
+  font-size: clamp(40px, 9.2vw, 190px);
+  line-height: 0.86;
+  font-weight: 800;
+  font-stretch: 125%;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+}
+
+.hl_nombre_linea {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.04em;
+}
+
+.hl_nombre_linea--accent {
+  color: var(--accent);
+}
+
+.hl_fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 48px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.hl_texto {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 54ch;
+}
+
+.hl_tagline {
+  margin: 0;
+  font-size: clamp(20px, 1.9vw, 26px);
+  font-weight: 600;
+  font-stretch: 105%;
+}
+
+.hl_desc {
+  margin: 0;
+  font-size: clamp(16px, 1.3vw, 19px);
+  line-height: 1.5;
+  color: var(--soft);
+  text-wrap: pretty;
+}
+
+.hl_acciones {
+  display: flex;
+  gap: 12px;
+  pointer-events: auto;
+  flex-wrap: wrap;
+}
+
+.hl_cta {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.hl_cta--primario {
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 16px 22px;
+  transition: background 0.3s;
+}
+
+.hl_cta--primario:hover { background: var(--ink); color: var(--accent-ink); }
+
+.hl_cta--secundario {
+  border: 1px solid #5a554e;
+  padding: 15px 22px;
+  transition: border-color 0.3s;
+}
+
+.hl_cta--secundario:hover { border-color: var(--ink); }
