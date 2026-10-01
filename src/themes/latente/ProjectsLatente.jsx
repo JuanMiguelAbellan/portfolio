@@ -20,6 +20,7 @@ function VistaPreviaFlotante({ activoRef }) {
     let raf
     function onMove(e) { mouse.current.x = e.clientX; mouse.current.y = e.clientY }
     function tick() {
+      if (document.hidden) { raf = requestAnimationFrame(tick); return }
       const dx = mouse.current.x - pos.current.px
       pos.current.px += dx * 0.11
       pos.current.py += (mouse.current.y - pos.current.py) * 0.11

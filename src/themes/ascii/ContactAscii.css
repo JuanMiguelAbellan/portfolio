@@ -27,6 +27,13 @@
   white-space: nowrap;
 }
 
+@media (max-width: 480px) {
+  .ca_titulo {
+    font-size: clamp(52px, 16vw, 380px);
+    white-space: normal;
+  }
+}
+
 .ca_fila {
   display: flex;
   flex-wrap: wrap;
