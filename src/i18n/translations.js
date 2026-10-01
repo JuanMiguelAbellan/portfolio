@@ -24,10 +24,6 @@ export const translations = {
       comingSoon: 'Repositorio pendiente de publicar',
       openDetails: 'Ver detalles de',
       close: 'Cerrar',
-      prev: 'Proyecto anterior',
-      next: 'Proyecto siguiente',
-      pause: 'Pausar el carrusel',
-      resume: 'Reanudar el carrusel',
     },
     hackathons: {
       title: 'Hackathons',
@@ -42,6 +38,9 @@ export const translations = {
     },
     theme: {
       switcherLabel: 'Estilo',
+    },
+    footer: {
+      built: 'Diseñada y construida por Juan Miguel Abellán',
     },
   },
   en: {
@@ -69,10 +68,6 @@ export const translations = {
       comingSoon: 'Repository not published yet',
       openDetails: 'View details for',
       close: 'Close',
-      prev: 'Previous project',
-      next: 'Next project',
-      pause: 'Pause carousel',
-      resume: 'Resume carousel',
     },
     hackathons: {
       title: 'Hackathons',
@@ -87,6 +82,9 @@ export const translations = {
     },
     theme: {
       switcherLabel: 'Style',
+    },
+    footer: {
+      built: 'Designed and built by Juan Miguel Abellán',
     },
   },
 }

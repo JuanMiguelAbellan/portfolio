@@ -1,0 +1,132 @@
+.prl_lista {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #2c2924;
+}
+
+.prl_fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px 32px;
+  padding: 28px 8px;
+  border-top: 1px solid #2c2924;
+  transition: padding-left 0.5s cubic-bezier(.2, .8, .2, 1), background 0.4s, color 0.3s;
+  cursor: pointer;
+  outline: none;
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+}
+
+.prl_fila:hover,
+.prl_fila:focus-visible {
+  padding-left: 40px;
+  background: var(--bg);
+  color: var(--accent);
+}
+
+.prl_num {
+  font-size: 12px;
+  color: var(--muted);
+  width: 28px;
+  flex: 0 0 auto;
+}
+
+.prl_medio {
+  flex: 1 1 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.prl_etiqueta {
+  align-self: flex-start;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 3px 7px;
+}
+
+.prl_titulo {
+  font-size: clamp(28px, 3.6vw, 52px);
+  font-weight: 600;
+  font-stretch: 105%;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+
+.prl_resumen {
+  flex: 1 1 320px;
+  max-width: 46ch;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--soft);
+}
+
+.prl_tech {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.prl_flecha {
+  font-size: 20px;
+}
+
+/* Vista previa flotante que sigue al cursor (solo ratón) */
+.prl_preview {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: min(440px, 40vw);
+  z-index: 40;
+  pointer-events: none;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.55s cubic-bezier(.7, 0, .2, 1);
+}
+
+.prl_preview--visible {
+  clip-path: inset(0 0 0% 0);
+}
+
+.prl_preview_imagen {
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: #2c2924;
+}
+
+.prl_preview_imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  display: block;
+  transform: scale(1.18);
+  transition: transform 0.9s cubic-bezier(.2, .8, .2, 1);
+}
+
+.prl_preview--visible .prl_preview_imagen img {
+  transform: scale(1);
+}
+
+.prl_preview_cap {
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 11px;
+  padding: 8px 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+@media (max-width: 640px) {
+  .prl_fila:hover, .prl_fila:focus-visible { padding-left: 8px; }
+}

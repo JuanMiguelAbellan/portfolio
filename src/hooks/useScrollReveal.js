@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 // Anima la entrada de un elemento cuando aparece en el viewport. Se
 // desactiva (visible desde el primer render) si el sistema pide menos
 // movimiento, igual que el carrusel de proyectos.
-export function useReveal(threshold = 0.15) {
+export function useScrollReveal(threshold = 0.15) {
   const ref = useRef(null)
   const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
   const [visible, setVisible] = useState(prefersReducedMotion)
