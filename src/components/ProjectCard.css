@@ -27,7 +27,7 @@
 .tarjeta_proyecto:focus-visible {
   border-color: rgba(94, 234, 212, 0.4);
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--accent-dim);
 }
 
 .tarjeta_proyecto:focus-visible {

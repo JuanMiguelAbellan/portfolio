@@ -71,3 +71,20 @@ export function PlayIcon(props) {
     </svg>
   )
 }
+
+export function SunIcon(props) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
+      <circle cx="12" cy="12" r="4.5" />
+      <path strokeLinecap="round" d="M12 2.5v2.5M12 19v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12H5M19 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8" />
+    </svg>
+  )
+}
+
+export function MoonIcon(props) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M20.4 14.7A8.6 8.6 0 0 1 9.3 3.6a.6.6 0 0 0-.73-.8A9.8 9.8 0 1 0 21.2 15.4a.6.6 0 0 0-.8-.7Z" />
+    </svg>
+  )
+}

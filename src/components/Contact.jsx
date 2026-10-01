@@ -1,4 +1,5 @@
 import { useLanguage } from '../i18n/LanguageContext'
+import { useReveal } from '../hooks/useReveal'
 import { GitHubIcon, LinkedInIcon, MailIcon } from './Icons'
 import './Contact.css'
 
@@ -7,6 +8,7 @@ const CORREO_DOMINIO = 'gmail.com'
 
 export default function Contact() {
   const { t } = useLanguage()
+  const [ref, visible] = useReveal()
 
   function abrirEmail() {
     window.location.href = `mailto:${CORREO_USUARIO}@${CORREO_DOMINIO}`
@@ -14,7 +16,7 @@ export default function Contact() {
 
   return (
     <section id="contacto">
-      <div className="contenedor contacto_interior">
+      <div className={`contenedor contacto_interior reveal ${visible ? 'reveal--visible' : ''}`} ref={ref}>
         <p className="etiqueta_seccion mono">05</p>
         <h2 className="titulo_seccion">{t.contact.title}</h2>
         <p className="contacto_texto">{t.contact.body}</p>

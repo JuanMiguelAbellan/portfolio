@@ -1,8 +1,11 @@
 import { useLanguage } from '../i18n/LanguageContext'
+import { useTheme } from '../theme/ThemeContext'
+import { SunIcon, MoonIcon } from './Icons'
 import './Header.css'
 
 export default function Header() {
   const { t, lang, toggleLang } = useLanguage()
+  const { theme, toggleTheme } = useTheme()
 
   return (
     <header className="cabecera">
@@ -15,9 +18,18 @@ export default function Header() {
           <a href="#skills">{t.nav.skills}</a>
           <a href="#contacto">{t.nav.contact}</a>
         </nav>
-        <button className="cabecera_idioma mono" onClick={toggleLang} aria-label="Cambiar idioma / Switch language">
-          {lang === 'es' ? 'EN' : 'ES'}
-        </button>
+        <div className="cabecera_acciones">
+          <button
+            className="cabecera_tema"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Tema claro / Light theme' : 'Tema oscuro / Dark theme'}
+          >
+            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+          </button>
+          <button className="cabecera_idioma mono" onClick={toggleLang} aria-label="Cambiar idioma / Switch language">
+            {lang === 'es' ? 'EN' : 'ES'}
+          </button>
+        </div>
       </div>
     </header>
   )
