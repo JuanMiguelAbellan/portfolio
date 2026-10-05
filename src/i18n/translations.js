@@ -36,9 +36,6 @@ export const translations = {
       body: "LET'S BUILD SOMETHING INTERESTING. No busco hacer otra web más. Busco crear algo que merezca la pena recordar.",
       email: 'Escribir un email',
     },
-    theme: {
-      switcherLabel: 'Estilo',
-    },
   },
   en: {
     nav: { about: 'About', projects: 'Projects', hackathons: 'Hackathons', skills: 'Skills', contact: 'Contact' },
@@ -76,9 +73,6 @@ export const translations = {
       title: 'Contact',
       body: "LET'S BUILD SOMETHING INTERESTING. I'm not looking to build just another website. I'm looking to create something worth remembering.",
       email: 'Send an email',
-    },
-    theme: {
-      switcherLabel: 'Style',
     },
   },
 }
