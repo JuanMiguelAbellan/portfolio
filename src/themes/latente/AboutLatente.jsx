@@ -1,9 +1,7 @@
 import { useRef } from 'react'
 import { useLanguage } from '../../i18n/LanguageContext'
-import { useWordLight } from '../../hooks/useWordLight'
+import { useWordStagger } from '../../hooks/useWordStagger'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
-import CabeceraSeccion from './CabeceraSeccion'
-import './latente-shared.css'
 import './AboutLatente.css'
 
 export default function AboutLatente() {
@@ -12,17 +10,23 @@ export default function AboutLatente() {
   const [segundoRef, segundoVisible] = useScrollReveal()
   const palabras = t.about.body[0].split(' ')
 
-  useWordLight(parrafoRef)
+  useWordStagger(parrafoRef)
 
   return (
-    <section id="sobre-mi" className="hl_seccion">
-      <CabeceraSeccion numero="01" titulo={t.about.title} />
-      <p ref={parrafoRef} className="al_parrafo">
-        {palabras.map((w, i) => <span key={i} data-w="">{w} </span>)}
-      </p>
-      <p ref={segundoRef} className={`al_segundo hl_reveal ${segundoVisible ? 'hl_reveal--visible' : ''}`}>
-        {t.about.body[1]}
-      </p>
+    <section id="sobre-mi" className="al_seccion">
+      <div className="al_grid">
+        <div className="al_etiqueta mono">{t.about.title}</div>
+        <div className="al_columna">
+          <p ref={parrafoRef} className="al_parrafo">
+            {palabras.map((w, i) => (
+              <span key={i} className="al_mascara"><span data-w="">{w}&nbsp;</span></span>
+            ))}
+          </p>
+          <p ref={segundoRef} className={`al_segundo reveal ${segundoVisible ? 'reveal--visible' : ''}`}>
+            {t.about.body[1]}
+          </p>
+        </div>
+      </div>
     </section>
   )
 }

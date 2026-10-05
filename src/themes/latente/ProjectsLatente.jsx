@@ -103,7 +103,7 @@ export default function ProjectsLatente() {
 
   return (
     <section id="proyectos" className="hl_seccion">
-      <CabeceraSeccion numero="02" titulo={t.projects.title} extra={`(${String(derivados.length).padStart(2, '0')})`} />
+      <CabeceraSeccion titulo={t.projects.title} extra={`(${String(derivados.length).padStart(2, '0')})`} />
       <div className="prl_lista" onMouseLeave={() => activoRef.current?.hide()}>
         {derivados.map((p) => <Fila key={p.id} p={p} onOpen={abrir} activoRef={activoRef} />)}
       </div>

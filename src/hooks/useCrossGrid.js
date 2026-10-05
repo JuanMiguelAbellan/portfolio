@@ -2,14 +2,14 @@ import { useEffect } from 'react'
 import { PAPEL_SECCIONES } from '../theme/tokens'
 import { papelState } from '../themes/papel/papelState'
 
-const ACCENT = '224,72,42'
 const R = 220
+const obtenerTonoPapel = () => PAPEL_SECCIONES[papelState.tono]?.rgb || PAPEL_SECCIONES.paper.rgb
 
-// Retícula de cruces (fondo fijo de Papel). Las cercanas al cursor
-// giran, crecen y se tiñen de bermellón; el resto sigue el color de
-// tono de la sección actual (papelState.tono). Parallax ligero con el
-// scroll.
-export function useCrossGrid(canvasRef) {
+// Retícula de cruces. Las cercanas al cursor giran, crecen y se tiñen
+// del color de acento; el resto usa colorReposo. En Papel (uso por
+// defecto) colorReposo seguía el tono de la sección actual
+// (papelState.tono); en otros temas se pasa un color fijo.
+export function useCrossGrid(canvasRef, { accentRgb = '224,72,42', colorReposo = obtenerTonoPapel } = {}) {
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -35,7 +35,7 @@ export function useCrossGrid(canvasRef) {
       if (!w || !h) return
       s.sx = (s.sx ?? s.mx) + (s.mx - (s.sx ?? s.mx)) * 0.15
       s.sy = (s.sy ?? s.my) + (s.my - (s.sy ?? s.my)) * 0.15
-      const col = PAPEL_SECCIONES[papelState.tono]?.rgb || PAPEL_SECCIONES.paper.rgb
+      const col = colorReposo()
       ctx.clearRect(0, 0, w, h)
       ctx.lineWidth = 1.2
       const off = (window.scrollY * 0.3) % gs
@@ -47,7 +47,7 @@ export function useCrossGrid(canvasRef) {
           const size = 3 + e * 7
           const ang = Math.atan2(dy, dx) + e * 1.2
           const px = x - dx * e * 0.18, py = y - dy * e * 0.18
-          ctx.strokeStyle = e > 0.02 ? `rgba(${ACCENT},${0.25 + e * 0.75})` : `rgba(${col.join(',')},0.13)`
+          ctx.strokeStyle = e > 0.02 ? `rgba(${accentRgb},${0.25 + e * 0.75})` : `rgba(${col.join(',')},0.13)`
           const ca = Math.cos(ang) * size, sa = Math.sin(ang) * size
           ctx.beginPath()
           ctx.moveTo(px - ca, py - sa); ctx.lineTo(px + ca, py + sa)

@@ -1,15 +1,13 @@
 import { useEffect } from 'react'
 
 const RAMP = ' .,:;-=+*x#%@'
-const PAGE = '#1a2152'
-const ACCENT = '205,235,79'
-const INK = '238,240,247'
 const LENTE_R = 0.28 // proporción del lado menor
 
 // Campo ASCII generado por ruido con una lente bajo el cursor; al hacer
 // clic se lanzan ondas. Sin ratón (o en táctil), la lente recorre un
-// punto automático.
-export function useAsciiField(canvasRef) {
+// punto automático. Colores del tema ASCII por defecto; otros temas
+// pasan los suyos.
+export function useAsciiField(canvasRef, { pageHex = '#1a2152', accentRgb = '205,235,79', inkRgb = '238,240,247', fontFamily = '"Space Mono", monospace' } = {}) {
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -44,9 +42,9 @@ export function useAsciiField(canvasRef) {
       s.ly = (s.ly ?? ty) + (ty - (s.ly ?? ty)) * 0.18
       s.ripples = s.ripples.filter(rp => t - rp.t < 2200)
 
-      ctx.fillStyle = PAGE
+      ctx.fillStyle = pageHex
       ctx.fillRect(0, 0, aw, ah)
-      ctx.font = `${Math.round(cw * 1.35)}px "Space Mono", monospace`
+      ctx.font = `${Math.round(cw * 1.35)}px ${fontFamily}`
       ctx.textBaseline = 'top'
 
       const T = t * 0.0006
@@ -66,7 +64,7 @@ export function useAsciiField(canvasRef) {
           const val = Math.min(1, n * 0.55 * (1 - lens * 0.3) + lens * lens * 0.75 + rip * 0.8)
           const k = Math.floor(val * (RAMP.length - 1))
           if (k <= 0) continue
-          ctx.fillStyle = (lens > 0.35 || rip > 0.25) ? `rgba(${ACCENT},${0.5 + val * 0.5})` : `rgba(${INK},${0.1 + val * 0.45})`
+          ctx.fillStyle = (lens > 0.35 || rip > 0.25) ? `rgba(${accentRgb},${0.5 + val * 0.5})` : `rgba(${inkRgb},${0.1 + val * 0.45})`
           ctx.fillText(RAMP[k], x, y)
         }
       }
