@@ -1,23 +1,58 @@
+.al_seccion {
+  padding: clamp(80px, 14vh, 160px) clamp(20px, 4vw, 56px);
+}
+
+.al_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 32px;
+}
+
+.al_etiqueta {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+}
+
+.al_columna {
+  grid-column: span 3;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
 .al_parrafo {
   margin: 0;
-  max-width: 30em;
-  font-size: clamp(24px, 3.2vw, 48px);
-  line-height: 1.2;
+  font-size: clamp(26px, 3.4vw, 52px);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
   font-weight: 500;
-  letter-spacing: -0.02em;
   text-wrap: pretty;
 }
 
-.al_parrafo span {
-  opacity: 0.16;
-  transition: opacity 0.25s, color 0.25s;
+.al_mascara {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.al_mascara [data-w] {
+  display: inline-block;
 }
 
 .al_segundo {
-  margin: 56px 0 0 auto;
+  margin: 0;
   max-width: 46ch;
-  font-size: 18px;
-  line-height: 1.55;
+  font-size: 19px;
+  line-height: 1.5;
   color: var(--soft);
   text-wrap: pretty;
+}
+
+@media (max-width: 760px) {
+  .al_columna { grid-column: span 1; }
 }

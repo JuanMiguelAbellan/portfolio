@@ -6,8 +6,22 @@
 .ctl_panel {
   position: absolute;
   inset: 0;
-  background: var(--accent);
-  color: var(--accent-ink);
+  background: var(--bg);
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.ctl_canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.ctl_capa {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -23,6 +37,7 @@
 
 .ctl_titulo {
   margin: 0;
+  color: var(--accent);
   font-size: clamp(60px, 14vw, 250px);
   line-height: 0.84;
   font-weight: 900;
@@ -62,20 +77,20 @@
 }
 
 .ctl_boton--email {
-  background: var(--page);
-  color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
   padding: 16px 22px;
-  transition: color 0.3s;
+  transition: background 0.3s, color 0.3s;
 }
 
-.ctl_boton--email:hover { color: var(--ink); }
+.ctl_boton--email:hover { background: var(--ink); color: var(--page); }
 
 .ctl_boton--borde {
-  border: 1px solid var(--page);
+  border: 1px solid var(--ink);
   padding: 15px 22px;
   background: transparent;
   color: inherit;
   transition: background 0.3s, color 0.3s;
 }
 
-.ctl_boton--borde:hover { background: var(--page); color: var(--accent); }
+.ctl_boton--borde:hover { background: var(--ink); color: var(--page); }
