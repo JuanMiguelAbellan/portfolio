@@ -6,7 +6,9 @@ export default function HeaderLatente() {
 
   return (
     <nav className="hl_nav mono">
-      <a href="#top" className="hl_nav_logo">JM.</a>
+      <a href="#top" className="hl_nav_logo">
+        <img src="/favicon.svg" alt="Juan Miguel Abellán" width="28" height="28" />
+      </a>
       <div className="hl_nav_enlaces">
         <a href="#sobre-mi">{t.nav.about}</a>
         <a href="#proyectos">{t.nav.projects}</a>

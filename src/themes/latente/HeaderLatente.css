@@ -17,8 +17,20 @@
 }
 
 .hl_nav_logo {
-  font-weight: 500;
   justify-self: start;
+  display: flex;
+  align-items: center;
+  /* El logo no debe invertirse con el mix-blend-mode:difference del
+     nav (eso es para que el texto se lea sobre cualquier fondo; el
+     icono ya tiene su propio contraste resuelto). isolate + blend
+     normal lo saca del grupo de mezcla del nav. */
+  isolation: isolate;
+  mix-blend-mode: normal;
+}
+
+.hl_nav_logo img {
+  display: block;
+  border-radius: 6px;
 }
 
 .hl_nav_enlaces {
