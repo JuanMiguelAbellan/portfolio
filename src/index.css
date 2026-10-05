@@ -1,9 +1,4 @@
-/* Tokens exactos de design/Portfolio.dc.html (objeto TK). --bg es la
-   superficie elevada (tarjetas, modal, píldora del selector); --page es
-   el fondo de la página — se mantienen separados porque el tema Papel
-   cambia --page por sección sin tocar el resto de la paleta. */
-:root,
-:root[data-theme='latente'] {
+:root {
   --bg: #1d1a17;
   --page: #151311;
   --ink: #efebe3;
@@ -18,46 +13,8 @@
   --radius: 0px;
   --pill: 0px;
   --overlay: rgba(10, 9, 8, 0.82);
+
   color-scheme: dark;
-}
-
-:root[data-theme='papel'] {
-  --bg: #fbfaf6;
-  --page: #f4f1ea;
-  --ink: #1d1b17;
-  --soft: #4d4941;
-  --accent: #e0482a;
-  --accent-ink: #f4f1ea;
-  --muted: #6b665c;
-  --line: #cfc9bc;
-  --font: 'Bricolage Grotesque', sans-serif;
-  --font-head: 'Bricolage Grotesque', sans-serif;
-  --font-mono: 'IBM Plex Mono', monospace;
-  --radius: 20px;
-  --pill: 999px;
-  --overlay: rgba(29, 27, 23, 0.55);
-  color-scheme: light;
-}
-
-:root[data-theme='ascii'] {
-  --bg: #212a60;
-  --page: #1a2152;
-  --ink: #eef0f7;
-  --soft: #c9cde3;
-  --accent: #cdeb4f;
-  --accent-ink: #1a2152;
-  --muted: #8f96bf;
-  --line: #3a4378;
-  --font: 'Space Mono', monospace;
-  --font-head: 'Big Shoulders Display', sans-serif;
-  --font-mono: 'Space Mono', monospace;
-  --radius: 0px;
-  --pill: 0px;
-  --overlay: rgba(10, 14, 40, 0.82);
-  color-scheme: dark;
-}
-
-:root {
   font-family: var(--font);
   color: var(--ink);
   background: var(--page);
@@ -71,7 +28,6 @@
 body {
   margin: 0;
   background: var(--page);
-  transition: background-color 0.6s ease, color 0.6s ease;
   overflow-x: clip;
 }
 
@@ -91,11 +47,6 @@ a {
 
 code, .mono {
   font-family: var(--font-mono);
-}
-
-.contenedor {
-  max-width: 1180px;
-  margin: 0 auto;
 }
 
 .reveal {

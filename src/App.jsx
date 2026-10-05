@@ -1,28 +1,23 @@
 import { LanguageProvider } from './i18n/LanguageContext'
-import { ThemeProvider } from './theme/ThemeContext'
-import Header from './components/Header'
-import Hero from './components/Hero'
-import About from './components/About'
-import Projects from './components/Projects'
-import Hackathons from './components/Hackathons'
-import Skills from './components/Skills'
-import Contact from './components/Contact'
-import ThemeSwitcher from './components/ThemeSwitcher'
+import Header from './themes/latente/HeaderLatente'
+import Hero from './themes/latente/HeroLatente'
+import About from './themes/latente/AboutLatente'
+import Projects from './themes/latente/ProjectsLatente'
+import Hackathons from './themes/latente/HackathonsLatente'
+import Skills from './themes/latente/SkillsLatente'
+import Contact from './themes/latente/ContactLatente'
 
 function App() {
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <Header />
-        <Hero />
-        <About />
-        <Projects />
-        <Hackathons />
-        <Skills />
-        <Contact />
-        <ThemeSwitcher />
-      </LanguageProvider>
-    </ThemeProvider>
+    <LanguageProvider>
+      <Header />
+      <Hero />
+      <About />
+      <Projects />
+      <Hackathons />
+      <Skills />
+      <Contact />
+    </LanguageProvider>
   )
 }
 

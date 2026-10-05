@@ -1,27 +1,14 @@
 import { useEffect } from 'react'
 
-const VARIANTES = {
-  latente: {
-    oculto: { transform: 'translateY(110%)', opacity: '1' },
-    transition: 'transform 1.1s cubic-bezier(.2,.9,.1,1)',
-    retardo: 45,
-  },
-  papel: {
-    oculto: { transform: 'translateY(60%) rotate(8deg)', opacity: '0' },
-    transition: 'transform 1s cubic-bezier(.2,.9,.1,1.2), opacity .6s',
-    retardo: 42,
-  },
-}
-
 // Revela las letras de [data-ch] dentro de containerRef una a una al
-// montar (el hero siempre está visible, no hace falta esperar scroll).
-export function useNameStagger(containerRef, variante = 'latente') {
+// montar (el hero siempre está visible, no hace falta esperar scroll):
+// translateY(110%) -> 0, con 45ms de retardo entre letras.
+export function useNameStagger(containerRef) {
   useEffect(() => {
     const root = containerRef.current
     if (!root) return
     const letras = root.querySelectorAll('[data-ch]')
     if (!letras.length) return
-    const v = VARIANTES[variante]
 
     if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
       letras.forEach(c => { c.style.transform = 'none'; c.style.opacity = 1 })
@@ -30,16 +17,14 @@ export function useNameStagger(containerRef, variante = 'latente') {
 
     letras.forEach(c => {
       c.style.transition = 'none'
-      c.style.transform = v.oculto.transform
-      c.style.opacity = v.oculto.opacity
+      c.style.transform = 'translateY(110%)'
     })
     void root.offsetHeight
     const timers = Array.from(letras).map((c, i) => setTimeout(() => {
-      c.style.transition = v.transition
+      c.style.transition = 'transform 1.1s cubic-bezier(.2,.9,.1,1)'
       c.style.transform = 'none'
-      c.style.opacity = '1'
-    }, 150 + i * v.retardo))
+    }, 150 + i * 45))
 
     return () => timers.forEach(clearTimeout)
-  }, [containerRef, variante])
+  }, [containerRef])
 }
