@@ -29,10 +29,6 @@
   color: var(--muted);
 }
 
-.hl_saludo_nota {
-  color: #5a554e;
-}
-
 .hl_nombre {
   margin: 0;
   white-space: nowrap;
