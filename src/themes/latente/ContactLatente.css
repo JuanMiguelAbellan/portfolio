@@ -1,36 +1,13 @@
 .ctl_seccion {
   position: relative;
   min-height: 100vh;
-  /* display:flex: un bloque de alto automático (o min-height puro, sin
-     flex/grid) no da un alto "definido" a un hijo
-     position:absolute;inset:0, así que el canvas no se estiraba. */
-  display: flex;
-  flex-direction: column;
 }
 
 .ctl_panel {
   position: absolute;
   inset: 0;
-  background: var(--bg);
-  color: var(--ink);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.ctl_canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-.ctl_capa {
-  position: relative;
-  z-index: 1;
-  height: 100%;
-  box-sizing: border-box;
+  background: var(--accent);
+  color: var(--accent-ink);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -46,7 +23,6 @@
 
 .ctl_titulo {
   margin: 0;
-  color: var(--accent);
   font-size: clamp(60px, 14vw, 250px);
   line-height: 0.84;
   font-weight: 900;
@@ -86,20 +62,20 @@
 }
 
 .ctl_boton--email {
-  background: var(--accent);
-  color: var(--accent-ink);
+  background: var(--page);
+  color: var(--accent);
   padding: 16px 22px;
-  transition: background 0.3s, color 0.3s;
+  transition: color 0.3s;
 }
 
-.ctl_boton--email:hover { background: var(--ink); color: var(--page); }
+.ctl_boton--email:hover { color: var(--ink); }
 
 .ctl_boton--borde {
-  border: 1px solid var(--ink);
+  border: 1px solid var(--page);
   padding: 15px 22px;
   background: transparent;
   color: inherit;
   transition: background 0.3s, color 0.3s;
 }
 
-.ctl_boton--borde:hover { background: var(--ink); color: var(--page); }
+.ctl_boton--borde:hover { background: var(--page); color: var(--accent); }

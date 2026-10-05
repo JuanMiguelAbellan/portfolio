@@ -1,24 +1,3 @@
-.skl_seccion {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.skl_canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  opacity: 0.55;
-}
-
-.skl_capa {
-  position: relative;
-  z-index: 1;
-}
-
 .skl_grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));

@@ -1,28 +1,3 @@
-.hkl_seccion {
-  position: relative;
-  overflow: hidden;
-  /* display:flex en vez de block: una sección en flujo de bloque con
-     alto automático no da un alto "definido" a un hijo
-     position:absolute;inset:0 (el canvas), así que no se estiraba —
-     se quedaba en su tamaño por defecto. Un contenedor flex sí lo da. */
-  display: flex;
-  flex-direction: column;
-}
-
-.hkl_canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  opacity: 0.55;
-}
-
-.hkl_capa {
-  position: relative;
-  z-index: 1;
-}
-
 .hkl_lista {
   display: flex;
   flex-direction: column;
