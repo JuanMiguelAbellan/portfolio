@@ -222,6 +222,7 @@ export const projects = [
     },
     tech: ['TypeScript', 'MCP', 'Node.js', 'zod', 'BM25', 'Ollama', 'Security'],
     links: {
+      demo: 'https://www.npmjs.com/package/docs-search-mcp',
       github: 'https://github.com/JuanMiguelAbellan/docs-search-mcp',
     },
   },
