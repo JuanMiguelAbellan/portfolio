@@ -19,7 +19,7 @@ export function useCircleReveal(sectionRef, panelRef) {
     panel.style.clipPath = 'circle(0% at 50% 100%)'
 
     const RETRASO = 0.35 // fracción de vh que hay que subir antes de que empiece
-    const RECORRIDO = 1.3 // en vh: cuanto mayor, más lento se abre
+    const RECORRIDO = 2.4 // en vh: cuanto mayor, más lento se abre
     let actual = 0
     let raf
 
@@ -32,7 +32,7 @@ export function useCircleReveal(sectionRef, panelRef) {
     function tick() {
       if (!document.hidden) {
         const destino = objetivo()
-        actual += (destino - actual) * 0.08
+        actual += (destino - actual) * 0.045
         if (Math.abs(destino - actual) < 0.001) actual = destino
         panel.style.clipPath = actual >= 0.999 ? 'none' : `circle(${(1 - Math.pow(1 - actual, 3)) * 150}% at 50% 100%)`
       }
