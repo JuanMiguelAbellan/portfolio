@@ -13,10 +13,10 @@ export default function HeaderLatente() {
         <a href="#hackathons">{t.nav.hackathons}</a>
         <a href="#skills">{t.nav.skills}</a>
         <a href="#contacto">{t.nav.contact}</a>
-        <button type="button" className="hl_nav_idioma" onClick={toggleLang} aria-label="Cambiar idioma / Switch language">
-          {lang === 'es' ? 'ES / en' : 'es / EN'}
-        </button>
       </div>
+      <button type="button" className="hl_nav_idioma" onClick={toggleLang} aria-label="Cambiar idioma / Switch language">
+        {lang === 'es' ? 'ES / en' : 'es / EN'}
+      </button>
     </nav>
   )
 }
