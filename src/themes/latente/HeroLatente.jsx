@@ -24,9 +24,7 @@ export default function HeroLatente() {
     <section id="top" className="hl_hero">
       <canvas ref={canvasRef} className="hl_canvas" />
       <div className="hl_contenido">
-        <p className="hl_saludo mono">
-          {t.hero.greeting} <span className="hl_saludo_nota mono">— query = cursor · top_k = 7</span>
-        </p>
+        <p className="hl_saludo mono">{t.hero.greeting}</p>
         <h1 className="hl_nombre" ref={nombreRef}>
           <span className="hl_nombre_linea"><Letras texto="Juan Miguel" /></span>
           <span className="hl_nombre_linea hl_nombre_linea--accent"><Letras texto="Abellán" /></span>

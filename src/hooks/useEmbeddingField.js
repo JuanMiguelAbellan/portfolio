@@ -9,21 +9,53 @@ const CLUSTERS = 7
 
 function generarPuntos(w, h) {
   const n = Math.max(70, Math.min(230, Math.round((w * h) / 8000)))
-  const centros = Array.from({ length: CLUSTERS }, () => [
-    w * (0.08 + Math.random() * 0.84),
-    h * (0.08 + Math.random() * 0.6),
-  ])
+
+  // Centros en una rejilla 3xN con jitter, no al azar puro: si no,
+  // por pura probabilidad salían dos clusters pegados (puntos
+  // amontonados, etiquetas ilegibles) y zonas enteras vacías.
+  const COLS = 3
+  const FILAS = Math.ceil(CLUSTERS / COLS)
+  const centros = Array.from({ length: CLUSTERS }, (_, i) => {
+    const cx = (i % COLS) + 0.5
+    const cy = Math.floor(i / COLS) + 0.5
+    return [
+      w * (0.08 + (cx / COLS) * 0.84 + (Math.random() - 0.5) * (0.22 / COLS)),
+      h * (0.08 + (cy / FILAS) * 0.6 + (Math.random() - 0.5) * (0.22 / FILAS)),
+    ]
+  })
+
   const gauss = () => (Math.random() + Math.random() + Math.random() - 1.5) / 1.5
-  return Array.from({ length: n }, (_, i) => {
+  const pts = Array.from({ length: n }, (_, i) => {
     const cl = Math.random() < 0.8 ? centros[i % CLUSTERS] : [Math.random() * w, Math.random() * h]
     return {
-      ox: cl[0] + gauss() * w * 0.11,
-      oy: cl[1] + gauss() * h * 0.14,
+      ox: cl[0] + gauss() * w * 0.15,
+      oy: cl[1] + gauss() * h * 0.2,
       ph: Math.random() * 6.28,
       word: EMBEDDING_WORDS[i % EMBEDDING_WORDS.length],
       glow: 0,
     }
   })
+
+  // Separación mínima entre puntos: sin esto, dos puntos del mismo
+  // cluster podían caer a pocos píxeles y sus etiquetas se superponían
+  // en cuanto ambos brillaban a la vez. Unas pocas pasadas bastan.
+  const MIN_D = Math.max(22, Math.min(w, h) * 0.035)
+  for (let pasada = 0; pasada < 4; pasada++) {
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i + 1; j < pts.length; j++) {
+        const dx = pts[j].ox - pts[i].ox, dy = pts[j].oy - pts[i].oy
+        const d = Math.hypot(dx, dy) || 0.001
+        if (d < MIN_D) {
+          const empuje = (MIN_D - d) / 2
+          const nx = dx / d, ny = dy / d
+          pts[i].ox -= nx * empuje; pts[i].oy -= ny * empuje
+          pts[j].ox += nx * empuje; pts[j].oy += ny * empuje
+        }
+      }
+    }
+  }
+
+  return pts
 }
 
 // Campo de embeddings del hero de Latente: puntos agrupados en clusters
@@ -108,8 +140,6 @@ export function useEmbeddingField(canvasRef) {
         ctx.moveTo(s.qx + seg[0], s.qy + seg[1]); ctx.lineTo(s.qx + seg[2], s.qy + seg[3])
       })
       ctx.stroke()
-      ctx.fillStyle = `rgba(${INK},0.9)`
-      ctx.fillText('q', s.qx + 12, s.qy + 20)
     }
 
     function loop(t) {
