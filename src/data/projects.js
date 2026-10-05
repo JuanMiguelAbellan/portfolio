@@ -59,14 +59,16 @@ export const projects = [
     },
     highlights: {
       es: [
-        'RAG con embeddings (pgvector + nomic-embed-text): solo se recuperan los fragmentos relevantes del documento en vez de reenviarlo entero en cada mensaje.',
+        'RAG con embeddings (pgvector + bge-m3): solo se recuperan los fragmentos relevantes del documento en vez de reenviarlo entero en cada mensaje.',
+        'El RAG se midió y mejoró con rag-eval (otro proyecto propio, sobre el mismo conjunto de 110 preguntas verificadas a mano): trocear por párrafos en vez de por ventana fija, y cambiar nomic-embed-text por bge-m3, subieron el MRR de la recuperación de 0.685 a 0.878.',
         'LLM autoalojado en infraestructura propia (Ollama) — control total sobre coste, privacidad y latencia.',
         'Streaming de la respuesta token a token por WebSocket.',
         'Edición y anotación nativa de PDF (motor completo de pdf.js).',
         'Pagos reales en modo test (Stripe: PaymentIntents + webhook) y verificación de email.',
       ],
       en: [
-        'RAG with embeddings (pgvector + nomic-embed-text): only the relevant document fragments are retrieved instead of resending the whole document on every message.',
+        'RAG with embeddings (pgvector + bge-m3): only the relevant document fragments are retrieved instead of resending the whole document on every message.',
+        'The RAG was measured and improved with rag-eval (another project of mine, on the same hand-checked set of 110 questions): switching from fixed-window to paragraph-aware chunking, and from nomic-embed-text to bge-m3, raised retrieval MRR from 0.685 to 0.878.',
         'Self-hosted LLM on its own infrastructure (Ollama) — full control over cost, privacy and latency.',
         'Token-by-token response streaming over WebSocket.',
         'Native PDF editing and annotation (full pdf.js engine).',
