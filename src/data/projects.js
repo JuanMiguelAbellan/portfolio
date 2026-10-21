@@ -7,6 +7,7 @@ import previewRagEval from '../assets/previews/rag-eval.webp'
 import previewReservas from '../assets/previews/reservas.webp'
 import previewTablero from '../assets/previews/tablero.webp'
 import previewDocsSearchMcp from '../assets/previews/docs-search-mcp.webp'
+import previewReciclab2bStats from '../assets/previews/reciclab2b-stats.webp'
 
 export const projects = [
   {
@@ -42,6 +43,38 @@ export const projects = [
     links: {
       demo: 'https://web-production-4d6ac.up.railway.app',
       github: 'https://github.com/JuanMiguelAbellan/reciclab2b',
+    },
+  },
+  {
+    id: 'reciclab2b-stats',
+    featured: false,
+    title: 'ReciclaB2B Stats',
+    preview: previewReciclab2bStats,
+    summary: {
+      es: 'Microservicio Java que sugiere precio de mercado a ReciclaB2B vía webhooks idempotentes.',
+      en: 'Java microservice that suggests a market price to ReciclaB2B via idempotent webhooks.',
+    },
+    description: {
+      es: 'Microservicio en Spring Boot, aparte de ReciclaB2B y con su propia base de datos: cuando un productor publica una oferta, sugiere un precio por tonelada calculado a partir de pedidos reales ya completados (no de precios pedidos sin aceptar), con reserva a ofertas publicadas y honestidad explícita si no hay datos suficientes. ReciclaB2B le envía eventos por webhook al publicar/cerrar ofertas y completar pedidos, siempre best-effort: si el servicio de stats falla, la acción real en el marketplace nunca se bloquea.',
+      en: 'Spring Boot microservice, separate from ReciclaB2B with its own database: when a producer publishes an offer, it suggests a price per ton computed from real completed orders (not unaccepted asking prices), falling back to published offers, and honestly saying so when there isn\'t enough data either way. ReciclaB2B feeds it events via webhook when offers are published/closed and orders completed — always best-effort, so a failure in the stats service never blocks the real marketplace action.',
+    },
+    highlights: {
+      es: [
+        'Decisión de arquitectura deliberada: nada de compartir base de datos con ReciclaB2B (antipatrón clásico de microservicios) — se alimenta solo por webhooks propios, idempotentes.',
+        'Un bug real que los tests cazaron: una migración declaraba generation_year como SMALLINT mientras la entidad JPA lo mapeaba como Integer — la validación de esquema de Hibernate lo detectó al momento, algo que H2 (en vez de Postgres real) nunca habría cazado.',
+        '16 tests: unitarios sobre la lógica de mediana/reserva y de integración completa con Testcontainers (Postgres real, no en memoria) — cubren idempotencia, autenticación y el caso honesto de "no hay datos suficientes".',
+        'Cliente HTTP en el lado Laravel con timeout corto que nunca lanza excepción: un fallo del servicio de stats jamás impide publicar una oferta o completar un pedido real.',
+      ],
+      en: [
+        'Deliberate architecture call: no shared database with ReciclaB2B (the classic microservices anti-pattern) — fed only through its own idempotent webhooks.',
+        'A real bug the test suite caught: a migration declared generation_year as SMALLINT while the JPA entity mapped it as Integer — Hibernate\'s schema validation caught it immediately, something H2 (instead of a real Postgres) would never have surfaced.',
+        '16 tests: unit tests for the median/fallback logic, plus full integration tests via Testcontainers against a real Postgres — covering idempotency, auth, and the honest "not enough data" case.',
+        'A short-timeout HTTP client on the Laravel side that never throws: a stats-service failure can never block publishing a real offer or completing a real order.',
+      ],
+    },
+    tech: ['Java', 'Spring Boot', 'Spring Data JPA', 'PostgreSQL', 'Flyway', 'Testcontainers'],
+    links: {
+      github: 'https://github.com/JuanMiguelAbellan/reciclab2b-stats',
     },
   },
   {
